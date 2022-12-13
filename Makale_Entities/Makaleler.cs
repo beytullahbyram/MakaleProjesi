@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Makale_Entities
     [Table("Makaleler")]
     public class Makaleler:EntitiesBase
     {
+        [Required,StringLength(20)]
         public string Baslik { get; set; }
+        [Required,StringLength(250)]
         public string Text { get; set; }
         public bool TaslakDurumu { get; set; }
         public int BegeniSayisi { get; set; }

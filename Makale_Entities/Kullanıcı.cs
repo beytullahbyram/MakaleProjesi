@@ -14,11 +14,14 @@ namespace Makale_Entities
         [StringLength(20)]
         public string Adi { get; set; }
         [StringLength(20)]
-
         public string Soyad { get; set; }
+        [Required,StringLength(20)]
         public string KullaniciAdi { get; set; }
+        [Required,StringLength (20)]
         public string Sifre { get; set; }
+        [Required,StringLength (20)]
         public string Email { get; set; }
+        [Required]
         public Guid AktivasyonAnahtari { get; set; }
         public bool Aktif { get; set; }
         public bool Admin { get; set; }
