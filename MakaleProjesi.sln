@@ -5,6 +5,12 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makale_Web", "Makale_Web\Makale_Web.csproj", "{3C19398B-6BA9-4DD3-ADF8-6E6BB2B55C06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makale_BLL", "Makale_BLL\Makale_BLL.csproj", "{BE6F0FC3-1944-48BD-9972-83309DD5DDA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makale_DatabaseLayer", "Makale_DatabaseLayer\Makale_DatabaseLayer.csproj", "{8733C4AC-AC5F-4C77-9958-BE8B73855528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makale_Entities", "Makale_Entities\Makale_Entities.csproj", "{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{3C19398B-6BA9-4DD3-ADF8-6E6BB2B55C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C19398B-6BA9-4DD3-ADF8-6E6BB2B55C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C19398B-6BA9-4DD3-ADF8-6E6BB2B55C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE6F0FC3-1944-48BD-9972-83309DD5DDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6F0FC3-1944-48BD-9972-83309DD5DDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6F0FC3-1944-48BD-9972-83309DD5DDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6F0FC3-1944-48BD-9972-83309DD5DDA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8733C4AC-AC5F-4C77-9958-BE8B73855528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8733C4AC-AC5F-4C77-9958-BE8B73855528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8733C4AC-AC5F-4C77-9958-BE8B73855528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8733C4AC-AC5F-4C77-9958-BE8B73855528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

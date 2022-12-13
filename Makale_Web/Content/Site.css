@@ -26,3 +26,24 @@ button:hover.like {
     background-position: 0 -30px;
     text-decoration: none;
 }
+
+.like-btn {
+    color: #ff1e0a;
+    background-color: whitesmoke;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 0 .7em;
+    overflow: visible;
+    font-size: .85em;
+    height: calc(2em + 2em * (.9 - .85));
+    line-height: 2em;
+}
+
+    .like-btn:hover {
+        /*background: #ea7909;*/
+        color: #ff1e0a;
+    }
