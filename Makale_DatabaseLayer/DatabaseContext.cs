@@ -11,6 +11,7 @@ namespace Makale_DatabaseLayer
 {
     public class DatabaseContext : DbContext
     {
+        
         DbSet<Makaleler> makaleler { get; set; }
         DbSet<Kategori> kategoriler { get; set; }
         DbSet<Yorum> yorumlar { get; set; }
