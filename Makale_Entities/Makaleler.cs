@@ -22,6 +22,14 @@ namespace Makale_Entities
         public virtual Kullanıcı Kullanici { get; set; }
         public virtual List<Yorum> Yorumlar { get; set; }
         public virtual List<Begeni> Begeniler { get; set; }
-       
+
+        public Makaleler()
+        {
+            Yorumlar = new List<Yorum>();
+            Begeniler = new List<Begeni>(); 
+
+        }
+
+
     }
 }

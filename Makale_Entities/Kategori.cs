@@ -13,10 +13,13 @@ namespace Makale_Entities
     {
         [Required,StringLength(50)]
         public string KategoriBaslik { get; set; }
-        [StringLength(150)]
+        [StringLength(300)]
         public string KategoriAciklama { get; set; }
         public virtual List<Makaleler> Makaleler { get; set; }//bir kategorinin birden fazla makale olur.
-
+        public Kategori()
+        {
+            Makaleler=new List<Makaleler>();
+        }
 
     }
 }

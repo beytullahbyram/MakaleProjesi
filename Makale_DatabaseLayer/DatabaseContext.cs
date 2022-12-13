@@ -12,13 +12,16 @@ namespace Makale_DatabaseLayer
     public class DatabaseContext : DbContext
     {
         
-        DbSet<Makaleler> makaleler { get; set; }
-        DbSet<Kategori> kategoriler { get; set; }
-        DbSet<Yorum> yorumlar { get; set; }
-        DbSet<Kullanıcı> kullanıcılar { get; set; } 
-        DbSet<Begeni> begeniler { get; set; }
+        public DbSet<Makaleler> makaleler { get; set; }
+        public DbSet<Kategori> kategoriler { get; set; }
+        public DbSet<Yorum> yorumlar { get; set; }
+        public DbSet<Kullanıcı> kullanıcılar { get; set; } 
+        public DbSet<Begeni> begeniler { get; set; }
 
-
+        public DatabaseContext()
+        {
+            Database.SetInitializer(new VeriTabanıOlusturucu());
+        }
 
 
 

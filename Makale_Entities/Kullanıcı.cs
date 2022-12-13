@@ -11,15 +11,15 @@ namespace Makale_Entities
     [Table("Kullanici")]
     public  class Kullanıcı :EntitiesBase
     {
-        [StringLength(20)]
+        [StringLength(50)]
         public string Adi { get; set; }
-        [StringLength(20)]
+        [StringLength(50)]
         public string Soyad { get; set; }
-        [Required,StringLength(20)]
+        [Required,StringLength(50)]
         public string KullaniciAdi { get; set; }
-        [Required,StringLength (20)]
+        [Required,StringLength (50)]
         public string Sifre { get; set; }
-        [Required,StringLength (20)]
+        [Required,StringLength (60)]
         public string Email { get; set; }
         [Required]
         public Guid AktivasyonAnahtari { get; set; }
@@ -28,5 +28,12 @@ namespace Makale_Entities
         public virtual List<Makaleler> Makaleler { get; set; }
         public virtual List<Yorum> Yorumlar { get; set; }
         public virtual List<Begeni> Begeniler { get; set; }
+
+        public Kullanıcı()
+        {
+            Makaleler=new List<Makaleler>();
+            Yorumlar= new  List<Yorum>();
+             Begeniler=new    List<Begeni>();
+        }
     }
 }
