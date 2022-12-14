@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Makaleler>
 @{
     ViewBag.Title = "Index";
 }
@@ -10,13 +10,7 @@
     <div class="row">
 
         <div class="col-md-3" style="margin-top:100px">
-            <p class="lead">Kategoriler</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Tüm kategoriler</a>
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
-            </div>
+            @Html.Partial("_PartialPageKategori")
         </div>
 
         <div class="col-md-9">
@@ -53,217 +47,200 @@
             </div>
 
             <div class="row">
+                @foreach (Makaleler item in Model)
+                {
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlarrrrr
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="~/image/bookimg.jpg" alt="">
+                            <div class="caption">
+                                <h4>
+                                    <a href="#">@item.Baslik</a>
+                                </h4>
+                                <h6>
+                                    <span class="glyphicon glyphicon-user">@item.Kullanici.KullaniciAdi</span><br />
+                                    <span class="glyphicon glyphicon-time">@item.DegistirmeTarihi.ToString("dd.MM.yy HH:mm")</span><br />
+                                </h6>
+                                @if (!string.IsNullOrEmpty(item.Text) && item.Text.Length > 5)
+                                {
+                                    <p>@item.Text.Substring(0, 20)</p><a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
+                                }
+                                else
+                                {
+                                    <p>@item.Text</p>
+                                }
+                            </div>
+                            <hr />
+                            <div class="ratings">
+                                <p class="pull-right">
+
+                                    <button class="btn btn-default btn-xs" id="btn-yorum" data-toggle="modal" data-target="#ornekModal">
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                        Yorumlar
+                                    </button>
+
+                                </p>
+                                <p>
+                                    <button class="btn btn-default btn-xs like-btn">
+                                        @item.BegeniSayisi
+                                        <span class="glyphicon glyphicon-heart-empty like"></span>
+                                    </button>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <h6>
-                                <span class="glyphicon glyphicon-user">John Doe</span><br />
-                                <span class="glyphicon glyphicon-time">@DateTime.Now</span><br />
-                            </h6>
-                            <p>lorem sjflksdjflksdjflsdjfl sdkjflskdjflksdj fklsdjflk sdjf lksjflksd fdskfjsdlkf dslkfjlsdkjf lsdkfj sdlkfjklsdjf kldsfaaaaa</p>
-                        </div>
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-xs like-btn">
-                                    10
-                                    <span class="glyphicon glyphicon-heart-empty like"></span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#btn-yorum").on("click", function () {
+            $("#ornekModal").trigger("show")
+        })
+    })
+</script>
+<div class="modal fade" tabindex="-1" role="dialog" id="ornekModal">
+    <!-- /.modal -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal Başlığı</h4>
+            </div>
+            <div class="modal-body">
+                <p>yorum...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                @*<button type="button" class="btn btn-primary">Değişiklikleri Kaydet</button>*@
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+<script>
+    $('#openBtn').click(function () {
+        $('#myModal').modal({
+            show: true
+        })
+    });
+
+    $(document).on('show.bs.modal', '.modal', function (event) {
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function () {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
+    });
+</script>
+<a data-toggle="modal" href="#myModal" class="btn btn-primary">modal aç</a>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal 1</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                Content for the dialog / modal goes here.
+                <br>
+                <br>
+                <br>
+                <p>more content</p>
+                <br>
+                <br>
+                <br>	<a data-toggle="modal" href="#myModal2" class="btn btn-primary">Launch modal</a>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-primary">Save changes</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade " id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal 2</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                Content for the dialog / modal goes here.
+                <br>
+                <br>
+                <p>come content</p>
+                <br>
+                <br>
+                <br>	<a data-toggle="modal" href="#myModal3" class="btn btn-primary">Launch modal</a>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-primary">Save changes</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal 3</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                Content for the dialog / modal goes here.
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>	<a data-toggle="modal" href="#myModal4" class="btn btn-primary">Launch modal</a>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-primary">Save changes</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal4">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal 4</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">Content for the dialog / modal goes here.</div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-primary">Save changes</a>
 
             </div>
         </div>

@@ -11,7 +11,7 @@ namespace Makale_DatabaseLayer
 {
     public class DatabaseContext : DbContext
     {
-        
+        //tablolarımızı temsil ederler
         public DbSet<Makaleler> makaleler { get; set; }
         public DbSet<Kategori> kategoriler { get; set; }
         public DbSet<Yorum> yorumlar { get; set; }
@@ -20,6 +20,7 @@ namespace Makale_DatabaseLayer
 
         public DatabaseContext()
         {
+            //Bir veritabanına ilk kez erişmek için belirli DbContext bir tür kullanıldığında veritabanı başlatıcısı çağrılır. 
             Database.SetInitializer(new VeriTabanıOlusturucu());
         }
 

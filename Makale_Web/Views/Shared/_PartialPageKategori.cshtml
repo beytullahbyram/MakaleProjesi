@@ -1,0 +1,15 @@
+﻿@using Makale_BLL
+@using Makale_Entities
+@{ 
+    KategoriYonet kategoriYonet = new KategoriYonet();
+    List<Kategori> kategoriler = kategoriYonet.KategorileriListele();
+}
+
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="#" class="list-group-item">Tüm kategoriler</a>
+     @foreach (Kategori item in kategoriler)
+      {
+        <a href="/Home/Kategori/@item.ID" class="list-group-item">@item.KategoriBaslik</a>
+      }
+</div>
