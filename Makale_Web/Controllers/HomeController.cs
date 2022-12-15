@@ -11,13 +11,13 @@ namespace Makale_Web.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+            MakaleYonet makaleYonet = new MakaleYonet();
         public ActionResult Index()
         {
             //Test test = new Test();
             //test.InsertTest();
             //test.UpdateTest();  
             //test.InsertComment();   
-            MakaleYonet makaleYonet = new MakaleYonet();
             return View(makaleYonet.MakaleListele().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
             //return View(makaleYonet.ListeleQueryable().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
         }
@@ -34,6 +34,10 @@ namespace Makale_Web.Controllers
                 return HttpNotFound();
             }
             return View("Index",kategori.Makaleler);
+        }
+        public ActionResult Begenilenler()
+        {
+            return View("Index",makaleYonet.MakaleListele().OrderByDescending(x=>x.BegeniSayisi).ToList());
         }
     }
 }
