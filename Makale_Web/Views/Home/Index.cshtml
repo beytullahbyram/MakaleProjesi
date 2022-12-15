@@ -9,7 +9,7 @@
 
     <div class="row">
 
-        <div class="col-md-3" style="margin-top:100px">
+        <div class="col-md-3">
             @Html.Partial("_PartialPageKategori")
         </div>
         <b>test</b>
@@ -58,12 +58,15 @@
                                     <a href="#">@item.Baslik</a>
                                 </h4>
                                 <h6>
-                                    <span class="glyphicon glyphicon-user">@item.Kullanici.KullaniciAdi</span><br />
+                                    <span class="glyphicon glyphicon-user"><b>@item.Kullanici.KullaniciAdi   </b></span><br />
                                     <span class="glyphicon glyphicon-time">@item.DegistirmeTarihi.ToString("dd.MM.yy HH:mm")</span><br />
                                 </h6>
                                 @if (!string.IsNullOrEmpty(item.Text) && item.Text.Length > 5)
                                 {
-                                    <p>@item.Text.Substring(0, 20)</p><a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
+                                    <p>
+                                        @item.Text.Substring(0, 20)
+                                    <a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
+                                    </p>
                                 }
                                 else 
                                 {
