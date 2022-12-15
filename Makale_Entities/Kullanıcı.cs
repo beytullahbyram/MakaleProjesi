@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Makale_Entities
         public string Adi { get; set; }
         [StringLength(50)]
         public string Soyad { get; set; }
-        [Required,StringLength(50)]
+        [DisplayName("kullanıcı adı"),Required(),StringLength(50)]
         public string KullaniciAdi { get; set; }
         [Required,StringLength (50)]
         public string Sifre { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Makale_BLL;
 using Makale_Entities;
+using Makale_Entities.View_modal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,13 +46,28 @@ namespace Makale_Web.Controllers
         {
             return View();
         }
+
+
         public ActionResult Login()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Login(Login_Modal modal)
+        {
+            
+            return View(modal);
+        }
+
+
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Register(Register_Modal modal)
+        {
+            return View(modal);
         }
     }
 }

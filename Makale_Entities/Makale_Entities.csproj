@@ -48,6 +48,8 @@
     <Compile Include="Kullanıcı.cs" />
     <Compile Include="Makaleler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View modal\Login-Modal.cs" />
+    <Compile Include="View modal\Register-Modal.cs" />
     <Compile Include="Yorum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
