@@ -12,7 +12,9 @@ namespace Makale_Web.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-            MakaleYonet makaleYonet = new MakaleYonet();
+        MakaleYonet makaleYonet = new MakaleYonet();
+        KullaniciYonet ky = new KullaniciYonet();
+
         public ActionResult Index()
         {
             //Test test = new Test();
@@ -55,8 +57,20 @@ namespace Makale_Web.Controllers
         [HttpPost]
         public ActionResult Login(Login_Modal modal)
         {
-            
-            return View(modal);
+            if(ModelState.IsValid)
+            {
+              BusinessLayerSonuc<Kullanıcı> sonuc=ky.LoginKontrol(modal);
+                if(sonuc.Hatalar.Count>0)
+                {
+                    sonuc.Hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(modal);
+                }
+
+                Session["login"] = sonuc.nesne; //Session da login olan kullanıcı bilgileri tutuldu.
+                return RedirectToAction("Index");//Login olduğu için indexe yönlendirildi.
+            }
+
+            return View(modal); 
         }
 
 
@@ -67,7 +81,25 @@ namespace Makale_Web.Controllers
         [HttpPost]
         public ActionResult Register(Register_Modal modal)
         {
+            if(ModelState.IsValid)
+            {
+               BusinessLayerSonuc<Kullanıcı> sonuc=ky.Kaydet(modal);
+                if(sonuc.Hatalar.Count>0)
+                {
+                   sonuc.Hatalar.ForEach(x => ModelState.AddModelError("", x));
+                    return View(modal);
+                }
+                return RedirectToAction("Login");
+            }
+
             return View(modal);
+        }
+
+
+        public ActionResult UserActivate(Guid id)
+        {
+            ky.kullanıcıbul(id);
+            return View();
         }
     }
 }

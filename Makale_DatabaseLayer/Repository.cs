@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Makale_Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -21,6 +21,7 @@ namespace Makale_DatabaseLayer
 
         public List<T> List()
         {
+            db.SaveChanges();
             return _objectset.ToList();
         }
         public IQueryable<T> ListE()
@@ -39,18 +40,39 @@ namespace Makale_DatabaseLayer
         {
             _objectset.Add(nesne);
 
-            return db.SaveChanges();
-        }
-        public int Delete(T nesne)
-        {
-            _objectset.Remove(nesne);
+            EntitiesBase obj = nesne as EntitiesBase;
+            DateTime zaman = DateTime.Now;
+
+            if(nesne is EntitiesBase)
+            {
+                obj.KayıtTarihi= zaman;
+                obj.DegistirmeTarihi = zaman;
+                obj.DegistirenKullanici = "system";
+            }
 
             return db.SaveChanges();
         }
-        public int Update()
+
+        public int Delete(T nesne)
         {
+            _objectset.Remove(nesne);
             return db.SaveChanges();
         }
+
+        public int Update(T nesne)
+        {
+            EntitiesBase obj = nesne as EntitiesBase;
+
+            if (nesne is EntitiesBase)
+            {
+                obj.DegistirmeTarihi = DateTime.Now;
+                obj.DegistirenKullanici = "system";
+            }
+
+            return db.SaveChanges();
+        }
+
+
 
 
     }

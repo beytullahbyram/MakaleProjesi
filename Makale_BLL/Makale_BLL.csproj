@@ -51,12 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayerSonuc.cs" />
     <Compile Include="KategoriYonet.cs" />
+    <Compile Include="KullaniciYonet.cs" />
     <Compile Include="MakaleYonet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Makale_Common\Makale_Common.csproj">
+      <Project>{f48a92b7-626c-497d-82f5-68c4fc204ef9}</Project>
+      <Name>Makale_Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Makale_DatabaseLayer\Makale_DatabaseLayer.csproj">
       <Project>{8733c4ac-ac5f-4c77-9958-be8b73855528}</Project>
       <Name>Makale_DatabaseLayer</Name>

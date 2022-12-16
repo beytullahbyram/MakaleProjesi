@@ -64,7 +64,7 @@ namespace Makale_DatabaseLayer
                 for (int j = 1; j < 6; j++)
                 {
                     Makaleler makale=new Makaleler() { 
-                        Baslik=FakeData.TextData.GetAlphabetical(1),
+                        Baslik=FakeData.TextData.GetAlphabetical(5),
                         Text=FakeData.TextData.GetSentences(1),
                         TaslakDurumu=false,
                         BegeniSayisi=FakeData.NumberData.GetNumber(1,4),

@@ -5,7 +5,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgba(61, 113, 174, 0.5);
+    background-color: #696969;
     height: 100vh;
 }
 
@@ -14,7 +14,7 @@ body {
     max-width: auto;
     height: 320px;
     border: 1px solid #9C9C9C;
-    background-color: rgba(66, 165, 174, 0.5);
+    background-color: #696969;
 }
 
     #login .container #login-row #login-column #login-box #login-form {
