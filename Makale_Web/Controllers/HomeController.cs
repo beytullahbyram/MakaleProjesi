@@ -158,7 +158,12 @@ namespace Makale_Web.Controllers
                 profilresmi.SaveAs(Server.MapPath($"~/image/{dosyaadi}"));
                 model.ProfilResmi = dosyaadi;
             }
-            ky.KullaniciUpdate(model);
+            BusinessLayerSonuc<Kullanıcı> sonuc = ky.KullaniciUpdate(model);
+            if(sonuc.Hatalar.Count > 0)
+            {
+                sonuc.Hatalar.ForEach(h => ModelState.AddModelError("",h));
+                return View(sonuc.nesne);
+            }
             return View(model);
         }
         public ActionResult ProfilSil()
