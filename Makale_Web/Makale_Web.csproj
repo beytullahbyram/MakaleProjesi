@@ -92,6 +92,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Body.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -103,6 +104,9 @@
     <Content Include="image\book.jpg" />
     <Content Include="image\book2.jpg" />
     <Content Include="image\bookimg.jpg" />
+    <Content Include="image\indir.jpg" />
+    <Content Include="image\user.jpg" />
+    <Content Include="image\uwp1959689.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.eot" />
@@ -150,6 +154,9 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\UserActivate.cshtml" />
+    <Content Include="Views\Home\UserActivateError.cshtml" />
+    <Content Include="Views\Home\ProfilGoster.cshtml" />
+    <Content Include="Views\Home\ProfilDegistir.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

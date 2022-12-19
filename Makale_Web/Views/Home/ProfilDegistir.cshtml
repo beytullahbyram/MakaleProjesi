@@ -1,0 +1,67 @@
+﻿@model Kullanıcı
+@{
+    ViewBag.Title = "ProfilDegistir";
+}
+
+<h2>ProfilDegistir</h2>
+
+<style>
+    .center {
+        position: absolute;
+        right;
+        0px;
+        width: 500px;
+        background-color: #b0e0e6;
+    }
+</style>
+<div class="container">
+    <div class="row text-center">
+        <h2>
+            <b>Profiliniz</b>
+        </h2>
+        <br />
+        <hr />
+    </div>
+    <div class="row" style="margin:initial">
+        <form action="/Home/ProfilDegistir" method="post" enctype="multipart/form-data">
+            <div class="col-md-3">
+                <img src="~/image/@Model.ProfilResmi" width="200px" style="border-radius: 50%" />
+                <input type="file"  name="ProfilResmi" id="ProfilResmi" class="form-control"/>
+            </div>
+            <div class="col-md-10" style="margin-left:inherit">
+                @Html.ValidationSummary(false)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Adi, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(Model => Model.Adi, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Soyad, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(Model => Model.Soyad, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(Model => Model.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(Model => Model.Sifre, new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" value="Kaydet">Güncelle</button>
+        </form>
+        <a href="/Home/ProfilGoster">İptal et</a>
+    </div>
+</div>

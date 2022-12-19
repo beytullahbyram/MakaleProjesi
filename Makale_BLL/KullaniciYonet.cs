@@ -83,12 +83,24 @@ namespace Makale_BLL
 
         }
 
-        public void kullanıcıbul(Guid id)
+        public BusinessLayerSonuc<Kullanıcı> kullanıcıbul(Guid id)
         {
-            Kullanıcı kullanici=rep_kul.Find(x => x.AktivasyonAnahtari==id);
-            kullanici.Aktif= true;  
-            rep_kul.List();
-            
+            BusinessLayerSonuc<Kullanıcı> sonuc = new BusinessLayerSonuc<Kullanıcı>();
+            sonuc.nesne=rep_kul.Find(x => x.AktivasyonAnahtari==id);
+            if(sonuc.nesne != null)
+            {
+                if (sonuc.nesne.Aktif)
+                {
+                    sonuc.Hatalar.Add("Kullanıcı zaten aktif");
+                }
+                sonuc.nesne.Aktif= true;  
+                rep_kul.Update(sonuc.nesne);
+            }
+            else
+            {
+                sonuc.Hatalar.Add("Aktifleştirilecek kullanıcı bulunumadı");
+            }
+            return sonuc;
         }
 	}
 }

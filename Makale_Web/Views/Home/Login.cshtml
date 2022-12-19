@@ -5,25 +5,34 @@
 }
 
 <link href="~/Content/css/Login-Register.css" rel="stylesheet" />
-
-
+<style>
+    html, body {
+        background-image: url('../../image/uwp1959689.jpeg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
 <body>
-    <div id="login" >
+
+
+    <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container" style="height:auto">
-            <div id="login-row" style="margin-left:350px"class="row justify-content-center align-items-center">
+            <div id="login-row" style="margin-left:350px" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="" method="post">
-                        @Html.ValidationSummary(false)
+                            @Html.ValidationSummary(false)
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 @*<label for="username" class="text-info">Username:</label>*@<br>
-                                @Html.TextBoxFor(model => model.KullaniciAdi, new { @class="form-control",placeholder="Johndoe"})
+                                @Html.TextBoxFor(model => model.KullaniciAdi, new { @class = "form-control", placeholder = "Johndoe" })
                             </div>
                             <div class="form-group">
                                 @*<label for="password" class="text-info">Password:</label>*@<br>
-                                @Html.TextBoxFor(model => model.Sifre, new { @class = "form-control", placeholder = "qaz!123",type="password"})
+                                @Html.TextBoxFor(model => model.Sifre, new { @class = "form-control", placeholder = "qaz!123", type = "password" })
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">

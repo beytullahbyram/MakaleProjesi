@@ -3,6 +3,24 @@
     ViewBag.Title = "UserActivate";
 }
 
+</style>
 <h2>UserActivate</h2>
+<div class="container">
+    <div class="text-success text-center">
+        <b>
+            @TempData["aktifsonuc"]
+        </b>
+        <h2>
+            Sayfaya yönlendiriliyorsunuz lütfen bekleyin...
+        </h2>
+    </div>
+</div>
 
-@TempData["id2"]
+<script>
+    $(function () {
+        $("footer").parent().hide();
+        setTimeout( function() {
+            window.location = "/Home/Index"
+        },4000)
+    })
+</script>

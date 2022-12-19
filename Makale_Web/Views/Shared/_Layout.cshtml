@@ -10,11 +10,10 @@
     <meta name="author" content="">
 
     <title>Makale</title>
-    <link href="~/Content/css/shop-homepage.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.6.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Body.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -50,49 +49,38 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav   navbar-right">
-                    <li>
-                        <a href="/Home/Login"> Giriş</a>
-                    </li>
-                    <li>
-                        <a href="/Home/Register">Üye ol</a>
-                    </li>
-                    <li>
-                        <a href="#">John Doe</a>
-                    </li>
-                    <li>
-                        <a href="#">Çıkış</a>
-                    </li>
+                    @{
+                        Kullanıcı kullanıcı = null;
+                        if (Session["login"] !=null)
+                        {
+                            kullanıcı=(Kullanıcı)Session["login"];
+                        }
+                        if (kullanıcı == null)
+                        {
+                            <li>
+                                <a href="/Home/Login"> Giriş</a>
+                            </li>
+                            <li>
+                                <a href="/Home/Register">Üye ol</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="/Home/ProfilGoster">@kullanıcı.KullaniciAdi</a>
+                            </li>
+                        }
+                        if (Session["login"] != null) 
+                        {
+                        <li>
+                            <a href="/Home/Logout">Çıkış</a>
+                        </li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-    @*<div class="container" style="height:10px">
-        <div class="row">
-            <div class="col-md-4" >
-                <div class="row">
-                        <a href="#" class="thumbnail">
-                            <img src="~/image/bookimg.jpg" alt="Alternate Text" />
-                        </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                        <a href="#" class="thumbnail">
-                            <img src="~/image/bookimg.jpg" alt="Alternate Text" />
-                        </a>
-                </div>
-            </div>
-            <div class="col-md-4" >
-                <div class="row">
-                        <a href="#" class="thumbnail">
-                            <img src="~/image/bookimg.jpg" alt="Alternate Text" />
-                        </a>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
     <!-- Page Content -->
     @RenderBody()
 

@@ -1,0 +1,53 @@
+﻿@model Kullanıcı
+@{
+    ViewBag.Title = "ProfilGoster";
+}
+
+<h2>ProfilGoster</h2>
+<style>
+    .center {
+        position: absolute;
+        right;
+        0px;
+        width: 500px;
+        background-color: #b0e0e6;
+    }
+</style>
+<div class="container">
+    <div class="row text-center">
+        <h2>
+            <b>Profiliniz</b>
+        </h2>
+        <br />
+        <hr />
+    </div>
+
+    <div class="row" style="margin:auto;">
+        <div class="col-md-4">
+
+            <img src="~/image/@Model.ProfilResmi" width="200px" style="border-radius: 50%" />
+        </div>
+        <div class="col-md-4" style="margin-left:auto">
+            <h3>@($"{Model.Adi} {Model.Soyad}")</h3>
+            <h4>@($"Email: {Model.Email}")</h4>
+        </div>
+        <div class="col-md-4">
+
+
+            <!-- Split button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger">Action</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/Home/ProfilDegistir">Profil Düzenle</a></li>
+                    <li><a href="#">Another action</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>

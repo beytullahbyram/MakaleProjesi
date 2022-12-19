@@ -98,8 +98,66 @@ namespace Makale_Web.Controllers
 
         public ActionResult UserActivate(Guid id)
         {
-            ky.kullanıcıbul(id);
+            BusinessLayerSonuc<Kullanıcı> sonuc= ky.kullanıcıbul(id);
+            if(sonuc.Hatalar.Count > 0)
+            {
+                TempData["aktifsonuc"]=sonuc.Hatalar;
+                return RedirectToAction("UserActivateError");
+            }
+            else
+            {
+                TempData["aktifsonuc"]="Kullanıcı aktifleştirildi";
+            }
             return View();
+        }
+        public ActionResult UserActivateError ()
+        {
+            List<string> hatalar=null;
+            if (TempData["aktifsonuc"] != null)
+            {
+                hatalar=(List<string>)TempData["aktifsonuc"];
+            }
+            return View(hatalar);
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");   
+        }
+
+        public ActionResult KayitBasarili()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");   
+        }
+
+        public ActionResult ProfilGoster()
+        {
+            
+            Kullanıcı kullanıcı=(Kullanıcı)Session["login"];
+
+
+            return View(kullanıcı);
+
+        }
+        
+       public ActionResult ProfilDegistir()
+        {
+            Kullanıcı kullanıcı=(Kullanıcı)Session["login"];
+            return View(kullanıcı);
+
+        }
+
+        [HttpPost]
+        public ActionResult ProfilDegistir(Kullanıcı model)
+        {
+            return View();
+        }
+        public ActionResult ProfilSil()
+        {
+            return View();
+
         }
     }
 }

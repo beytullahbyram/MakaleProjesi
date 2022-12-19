@@ -21,7 +21,6 @@ namespace Makale_DatabaseLayer
 
         public List<T> List()
         {
-            db.SaveChanges();
             return _objectset.ToList();
         }
         public IQueryable<T> ListE()

@@ -1,20 +1,29 @@
 ﻿
 
-
-
+/*
 body {
     margin: 0;
     padding: 0;
     background-color: #696969;
     height: 100vh;
+}*/
+
+html, body {
+    background-image: url('../../image/uwp1959689.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+
 
 #login .container #login-row #login-column #login-box {
     margin-top: 120px;
     max-width: auto;
     height: 320px;
     border: 1px solid #9C9C9C;
-    background-color: #696969;
+    /*background-color: #696969;*/
 }
 
     #login .container #login-row #login-column #login-box #login-form {
