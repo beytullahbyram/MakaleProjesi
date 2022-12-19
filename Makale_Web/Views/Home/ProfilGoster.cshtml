@@ -7,8 +7,6 @@
 <style>
     .center {
         position: absolute;
-        right;
-        0px;
         width: 500px;
         background-color: #b0e0e6;
     }
@@ -25,7 +23,7 @@
     <div class="row" style="margin:auto;">
         <div class="col-md-4">
 
-            <img src="~/image/@Model.ProfilResmi" width="200px" style="border-radius: 50%" />
+            <img src="~/image/@Model.ProfilResmi" width="200" style="border-radius: 50%" />
         </div>
         <div class="col-md-4" style="margin-left:auto">
             <h3>@($"{Model.Adi} {Model.Soyad}")</h3>
@@ -42,7 +40,7 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="/Home/ProfilDegistir">Profil Düzenle</a></li>
+                    <li><a href="/Home/ProfilDegistir">Action</a></li>
                     <li><a href="#">Another action</a></li>
                 </ul>
             </div>

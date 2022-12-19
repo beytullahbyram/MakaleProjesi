@@ -150,9 +150,16 @@ namespace Makale_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfilDegistir(Kullanıcı model)
+        public ActionResult ProfilDegistir(Kullanıcı model,HttpPostedFile profilresmi)
         {
-            return View();
+            if(profilresmi != null)
+            {
+                string dosyaadi=$"user_{model.ID}.{profilresmi.ContentType.Split('/')[1]}";
+                profilresmi.SaveAs(Server.MapPath($"~/image/{dosyaadi}"));
+                model.ProfilResmi = dosyaadi;
+            }
+            ky.KullaniciUpdate(model);
+            return View(model);
         }
         public ActionResult ProfilSil()
         {

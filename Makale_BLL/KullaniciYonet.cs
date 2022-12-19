@@ -102,5 +102,35 @@ namespace Makale_BLL
             }
             return sonuc;
         }
+
+        public BusinessLayerSonuc<Kullanıcı> KullaniciUpdate(Kullanıcı kullanıcı)
+        {
+            BusinessLayerSonuc<Kullanıcı>sonuc=new BusinessLayerSonuc<Kullanıcı>();
+            Kullanıcı k=rep_kul.Find(x=>x.KullaniciAdi == kullanıcı.KullaniciAdi || x.Email == kullanıcı.Email);
+            if(k!=null && k.ID != kullanıcı.ID)
+            {
+                if(k.KullaniciAdi == kullanıcı.KullaniciAdi)
+                    sonuc.Hatalar.Add("Kullanıcı adi sistemde kayıtlı");
+                if(k.Email == kullanıcı.Email)
+                    sonuc.Hatalar.Add("Email sistemde kayıtlı");
+                return sonuc;
+            }
+            sonuc.nesne=rep_kul.Find(x=>x.ID==kullanıcı.ID);
+            sonuc.nesne.Adi=kullanıcı.Adi;
+            sonuc.nesne.Soyad=kullanıcı.Soyad;
+            sonuc.nesne.KullaniciAdi=kullanıcı.KullaniciAdi;
+            sonuc.nesne.Email=kullanıcı.Email;
+            sonuc.nesne.Sifre=kullanıcı.Sifre;
+
+            if(!string.IsNullOrEmpty(kullanıcı.ProfilResmi))
+                sonuc.nesne.ProfilResmi=kullanıcı.ProfilResmi;
+
+            int updatesonuc=rep_kul.Update(sonuc.nesne);
+            if(updatesonuc<0)
+                sonuc.Hatalar.Add("Kullanıcı güncellenemedi");
+            return sonuc;
+
+
+        }
 	}
 }
