@@ -3,55 +3,62 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container">
+    <div class="row">
+        <h2>Index</h2>
+        <div class="container">
+            <div class="row">
 
-<h2>Index</h2>
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KategoriBaslik)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KategoriAciklama)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KayıtTarihi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DegistirmeTarihi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DegistirenKullanici)
+                        </th>
+                        <th></th>
+                    </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.KategoriBaslik)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KategoriAciklama)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KayıtTarihi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegistirmeTarihi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegistirenKullanici)
-        </th>
-        <th></th>
-    </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KategoriBaslik)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KategoriAciklama)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KayıtTarihi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegistirmeTarihi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DegistirenKullanici)
+                        </td>
+                        <td>
+                            <a href="/Kategori/Edit/@item.ID">Edit</a>
+                            <a href="/Kategori/Details/@item.ID">Details</a>
+                            <a href="/Kategori/Delete/@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.KategoriBaslik)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KategoriAciklama)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KayıtTarihi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DegistirmeTarihi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DegistirenKullanici)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

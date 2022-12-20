@@ -5,54 +5,57 @@
 }
 
 <h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div>
+            <h4>Kategori</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.KategoriBaslik)
+                </dt>
 
-<div>
-    <h4>Kategori</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.KategoriBaslik)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.KategoriBaslik)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.KategoriBaslik)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.KategoriAciklama)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KategoriAciklama)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.KategoriAciklama)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.KategoriAciklama)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.KayıtTarihi)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KayıtTarihi)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.KayıtTarihi)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.KayıtTarihi)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegistirmeTarihi)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegistirmeTarihi)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DegistirmeTarihi)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegistirmeTarihi)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DegistirenKullanici)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegistirenKullanici)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DegistirenKullanici)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegistirenKullanici)
-        </dd>
-
-    </dl>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
