@@ -28,7 +28,9 @@
             </div>
             <div class="col-md-10" style="margin-left:inherit">
                 @Html.ValidationSummary(false)
-
+                <input type="hidden" name="id" value="@Model.ID" />
+                <input type="hidden" name="id" value="@Model.ProfilResmi" />
+                
                 <div class="form-group">
                     @Html.LabelFor(model => model.Adi, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -53,10 +55,17 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(Model => Model.Sifre, new { @class = "form-control" })
+                        @Html.EditorFor(Model => Model.Sifre, new { @class = "form-control", type = "password" })
                     </div>
                 </div>
 
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(Model => Model.KullaniciAdi, new { @class = "form-control" })
+                    </div>
+                </div>
             </div>
             <button type="submit" value="Kaydet">Güncelle</button>
         </form>

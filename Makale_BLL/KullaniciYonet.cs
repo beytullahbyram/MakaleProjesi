@@ -40,7 +40,8 @@ namespace Makale_BLL
                      Sifre=model.Sifre,
                      AktivasyonAnahtari=Guid.NewGuid(),
                      Admin=false,
-                     Aktif=false                
+                     Aktif=false,
+
                 });
                 if(kaydet>0)
                 {
@@ -61,7 +62,6 @@ namespace Makale_BLL
 
 		}
 
-
         public BusinessLayerSonuc<Kullanıcı> LoginKontrol(Login_Modal model)
         {
             BusinessLayerSonuc<Kullanıcı> sonuc = new BusinessLayerSonuc<Kullanıcı>();
@@ -73,6 +73,7 @@ namespace Makale_BLL
                 if(!sonuc.nesne.Aktif)
                 {
                     sonuc.Hatalar.Add("Kullanıcı aktif değildir.Aktivasyon için e-posta adresiniz kontrol ediniz.");
+                    return sonuc;
                 }
             }
             else
@@ -92,6 +93,7 @@ namespace Makale_BLL
                 if (sonuc.nesne.Aktif)
                 {
                     sonuc.Hatalar.Add("Kullanıcı zaten aktif");
+                    return sonuc;
                 }
                 sonuc.nesne.Aktif= true;  
                 rep_kul.Update(sonuc.nesne);
@@ -131,6 +133,17 @@ namespace Makale_BLL
             return sonuc;
 
 
+        }
+
+        public BusinessLayerSonuc<Kullanıcı> KullaniciSil(int id)
+        {
+            BusinessLayerSonuc<Kullanıcı>sonuc=new BusinessLayerSonuc<Kullanıcı>();
+            sonuc.nesne=rep_kul.Find(x=>x.ID==id);
+            if (sonuc.nesne != null)
+                rep_kul.Delete(sonuc.nesne);
+            else if(sonuc.nesne==null)
+                sonuc.Hatalar.Add("Kullanıcı bulunamadı");
+            return sonuc;
         }
 	}
 }

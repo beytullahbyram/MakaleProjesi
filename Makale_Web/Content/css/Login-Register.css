@@ -33,3 +33,10 @@ html, body {
         #login .container #login-row #login-column #login-box #login-form #register-link {
             margin-top: -85px;
         }
+html, body {
+    background-image: url('../../image/uwp1959689.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

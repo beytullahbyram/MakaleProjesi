@@ -1,4 +1,5 @@
 ﻿using Makale_BLL;
+using Makale_Common;
 using Makale_Entities;
 using Makale_Entities.View_modal;
 using System;
@@ -81,6 +82,7 @@ namespace Makale_Web.Controllers
         [HttpPost]
         public ActionResult Register(Register_Modal modal)
         {
+            Uygulama.kullanidiad=modal.KullaniciAdi;
             if(ModelState.IsValid)
             {
                BusinessLayerSonuc<Kullanıcı> sonuc=ky.Kaydet(modal);
@@ -105,18 +107,14 @@ namespace Makale_Web.Controllers
                 return RedirectToAction("UserActivateError");
             }
             else
-            {
                 TempData["aktifsonuc"]="Kullanıcı aktifleştirildi";
-            }
             return View();
         }
         public ActionResult UserActivateError ()
         {
             List<string> hatalar=null;
             if (TempData["aktifsonuc"] != null)
-            {
                 hatalar=(List<string>)TempData["aktifsonuc"];
-            }
             return View(hatalar);
         }
 
@@ -134,8 +132,11 @@ namespace Makale_Web.Controllers
 
         public ActionResult ProfilGoster()
         {
-            
             Kullanıcı kullanıcı=(Kullanıcı)Session["login"];
+            if(kullanıcı == null)
+            {
+                return RedirectToAction("Index");
+            }
 
 
             return View(kullanıcı);
@@ -148,27 +149,57 @@ namespace Makale_Web.Controllers
             return View(kullanıcı);
 
         }
-
         [HttpPost]
         public ActionResult ProfilDegistir(Kullanıcı model,HttpPostedFile profilresmi)
         {
-            if(profilresmi != null)
+            Uygulama.kullanidiad=model.KullaniciAdi;
+            ModelState.Remove("DegistirenKullanici");
+            if (ModelState.IsValid)
             {
-                string dosyaadi=$"user_{model.ID}.{profilresmi.ContentType.Split('/')[1]}";
-                profilresmi.SaveAs(Server.MapPath($"~/image/{dosyaadi}"));
-                model.ProfilResmi = dosyaadi;
-            }
-            BusinessLayerSonuc<Kullanıcı> sonuc = ky.KullaniciUpdate(model);
-            if(sonuc.Hatalar.Count > 0)
-            {
-                sonuc.Hatalar.ForEach(h => ModelState.AddModelError("",h));
-                return View(sonuc.nesne);
+                if(profilresmi != null)
+                {
+                    string dosyaadi=$"user_{model.ID}.{profilresmi.ContentType.Split('/')[1]}";
+                    profilresmi.SaveAs(Server.MapPath($"~/image/{dosyaadi}"));
+                    model.ProfilResmi = dosyaadi;
+                }
+                BusinessLayerSonuc<Kullanıcı> sonuc = ky.KullaniciUpdate(model);
+                if(sonuc.Hatalar.Count > 0)
+                {
+                    sonuc.Hatalar.ForEach(h => ModelState.AddModelError("",h));
+                    return View(sonuc.nesne);
+                }
             }
             return View(model);
         }
+        [HttpPost]
+        public ActionResult ProfilSil(Kullanıcı model,HttpPostedFileBase profilresmi)
+        {
+            if (ModelState.IsValid)
+            {
+                if(profilresmi != null)
+                {
+                    string dosyaadi=$"user_{model.ID}.{profilresmi.ContentType.Split('/')[1]}";
+                    profilresmi.SaveAs(Server.MapPath($"~/image/{dosyaadi}"));
+                    model.ProfilResmi = dosyaadi;
+                }
+                BusinessLayerSonuc<Kullanıcı> sonuc = ky.KullaniciUpdate(model);
+                if(sonuc.Hatalar.Count > 0)
+                {
+                    sonuc.Hatalar.ForEach(h => ModelState.AddModelError("",h));
+                    return View(sonuc.nesne);
+                }
+                return RedirectToAction("ProfilGoster");
+            }
+            return View(model);
+        }
+
+
         public ActionResult ProfilSil()
         {
-            return View();
+            Kullanıcı kullanıcı= Session["login"] as Kullanıcı;
+            ky.KullaniciSil(kullanıcı.ID);
+            
+            return View("Index");
 
         }
     }

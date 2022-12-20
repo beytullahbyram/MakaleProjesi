@@ -1,0 +1,58 @@
+﻿@model Makale_Entities.Kategori
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kategori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriBaslik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriBaslik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriAciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriAciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KayıtTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayıtTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegistirmeTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DegistirmeTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DegistirenKullanici)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DegistirenKullanici)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

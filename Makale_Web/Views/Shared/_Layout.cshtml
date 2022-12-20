@@ -17,7 +17,13 @@
 </head>
 
 <body>
-
+    @{ 
+        Kullanıcı kullanıcı = null;
+        if (Session["login"] !=null)
+        {
+            kullanıcı=(Kullanıcı)Session["login"];
+        }
+    }
 
 
     <!-- Navigation -->
@@ -35,8 +41,16 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#"><span class="glyphicon glyphicon-user"></span>  Yönetim</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Yönetim <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Not/NotEkle">Not Ekle</a></li>
+                            <li><a href="/Not/Notlarım">Notlarım</a></li>
+                            <li><a href="/Not/Begendiklerim">Beğendiklerim</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/Kategori/KategoriEkle">Kategori Ekle</a></li>
+                            <li><a href="/Kategori/Kategorilerim">Kategorilerim</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="/Home/Begenilenler">Beğenilenler</a>
@@ -50,11 +64,6 @@
                 </ul>
                 <ul class="nav navbar-nav   navbar-right">
                     @{
-                        Kullanıcı kullanıcı = null;
-                        if (Session["login"] !=null)
-                        {
-                            kullanıcı=(Kullanıcı)Session["login"];
-                        }
                         if (kullanıcı == null)
                         {
                             <li>
@@ -84,39 +93,7 @@
     <!-- Page Content -->
     @RenderBody()
 
-    <div class="container" style="margin-top:300px">
-        <hr>
-        <footer>
-            <div class="row text-center">
-                <div class="col-lg-4">
-                    <b>Site Haritası</b>
-                    <hr />
-                    <a href="#">Hakkımızda</a>
-                    <br />
-                    <a href="#">Beğenilenler</a>
-                    <br />
-                    <a href="#">Son yazılanlar</a>
-                </div>
-                <div class="col-lg-4">
-                    <b>&copy; Makale Web Projesi 2022</b>
-                    <hr />
-                    <p>@DateTime.Now Tüm hakları saklıdır</p>
-                </div>
-                <div class="col-lg-4">
-                    <b>E-Bülten üyeliği</b>
-                    <hr />
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Go!</button>
-                            </span>
-                        </div><!-- /input-group -->
-                    </div><!-- /.col-lg-6 -->
-                </div>
-            </div>
-        </footer>
-    </div>
+    @RenderSection("Footer",false)
 </body>
 
 </html>

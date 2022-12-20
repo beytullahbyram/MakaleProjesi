@@ -19,5 +19,19 @@ namespace Makale_BLL
         {
             return repository_kategoriler.Find(x=>x.ID == id);
         }
+        public Kategori KategoriEkle(int id)
+        {
+            return repository_kategoriler.Find(x=>x.ID == id);
+        }
+
+        public object KategoriUpdate(Kategori kategori)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void KategoriSil(Kategori kategori)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

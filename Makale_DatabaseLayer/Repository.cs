@@ -66,6 +66,7 @@ namespace Makale_DatabaseLayer
             {
                 obj.DegistirmeTarihi = DateTime.Now;
                 obj.DegistirenKullanici = "system";
+                
             }
 
             return db.SaveChanges();
