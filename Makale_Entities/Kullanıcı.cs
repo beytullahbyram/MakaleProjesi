@@ -16,7 +16,7 @@ namespace Makale_Entities
         public string Adi { get; set; }
         [StringLength(50)]
         public string Soyad { get; set; }
-        [StringLength (50)]
+        [StringLength (50),ScaffoldColumn(false)]//cshtml sayfasında gelmesini istemediğinden  bu özelliği veriyoruz
         public string ProfilResmi { get; set; }
         [DisplayName("kullanıcı adı"),Required(),StringLength(50)]
         public string KullaniciAdi { get; set; }
@@ -24,7 +24,7 @@ namespace Makale_Entities
         public string Sifre { get; set; }
         [Required,StringLength (60)]
         public string Email { get; set; }
-        [Required]
+        [Required,ScaffoldColumn(false)]
         public Guid AktivasyonAnahtari { get; set; }
         public bool Aktif { get; set; }
         public bool Admin { get; set; }

@@ -23,7 +23,15 @@ namespace Makale_DatabaseLayer
             //Bir veritabanına ilk kez erişmek için belirli DbContext bir tür kullanıldığında veritabanı başlatıcısı çağrılır. 
             Database.SetInitializer(new VeriTabanıOlusturucu());
         }
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Fluent api
+            //Makale tablosunun yorum tablosu ile ilişki olduğunu belirttik => hasmany
+            //bir yourumun mutlaka notu vardır => withrequired
+            //delete işleminde cascade' izin verdik
+            modelBuilder.Entity<Makaleler>().HasMany(m=>m.Yorumlar).WithRequired(y=>y.Makaleler).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Makaleler>().HasMany(m=>m.Begeniler).WithRequired(b=>b.Makaleler).WillCascadeOnDelete(true);
+        }
 
 
 

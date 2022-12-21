@@ -8,124 +8,111 @@ using System.Web;
 using System.Web.Mvc;
 using Makale_BLL;
 using Makale_Entities;
+using Makale_Web.Data;
 
 namespace Makale_Web.Controllers
 {
-    public class KategoriController : Controller
+    public class KullanıcıController : Controller
     {
-        #region DB
-        private KategoriYonet ky = new KategoriYonet();
-        #endregion
+        KullaniciYonet ky = new KullaniciYonet();
 
+        // GET: Kullanıcı
         public ActionResult Index()
         {
-            return View(ky.KategorileriListele());
+            return View(ky.Listele());
         }
 
+        // GET: Kullanıcı/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = ky.KategoriBul(id.Value);
-            if (kategori == null)
+            Kullanıcı kullanıcı = ky.KullaniciBul(id.Value);
+            if (kullanıcı == null)
             {
                 return HttpNotFound();
             }
-            return View(kategori);
+            return View(kullanıcı);
         }
 
-        #region CREATE
-
+        // GET: Kullanıcı/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        // POST: Kullanıcı/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Kategori kategori)
+        public ActionResult Create(Kullanıcı kullanıcı)
         {
-            ModelState.Remove("DegistirenKullanici");
             if (ModelState.IsValid)
             {
-                BusinessLayerSonuc<Kategori> sonuc= ky.KategoriEkle(kategori);
-                if(sonuc.Hatalar.Count > 0)
-                {
-                    sonuc.Hatalar.ForEach(h =>ModelState.AddModelError("",h));  
-                    return View(kategori);
-                }
+                ky.KullaniciKaydet(kullanıcı);
                 return RedirectToAction("Index");
             }
 
-            return View(kategori);
+            return View(kullanıcı);
         }
-        #endregion
 
-        #region EDIT
-
+        // GET: Kullanıcı/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = ky.KategoriBul(id.Value);
-            if (kategori == null)
+            Kullanıcı kullanıcı = ky.KullaniciBul(id.Value);
+            if (kullanıcı == null)
             {
                 return HttpNotFound();
             }
-            return View(kategori);
+            return View(kullanıcı);
         }
 
-
+        // POST: Kullanıcı/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Kategori kategori)
+        public ActionResult Edit(Kullanıcı kullanıcı)
         {
             if (ModelState.IsValid)
             {
-                ky.KategoriUpdate(kategori);
+                ky.KullaniciUpdate(kullanıcı);
                 return RedirectToAction("Index");
             }
-            return View(kategori);
+            return View(kullanıcı);
         }
-        #endregion
 
-        #region DELETE
-        //GET
+        // GET: Kullanıcı/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategori kategori = ky.KategoriBul(id.Value);
-            if (kategori == null)
+            Kullanıcı kullanıcı =ky.KullaniciBul(id.Value);
+            if (kullanıcı == null)
             {
                 return HttpNotFound();
             }
-            return View(kategori);
+            return View(kullanıcı);
         }
 
-
-        //POST
+        // POST: Kullanıcı/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Kategori kategori = ky.KategoriBul(id);
-
-            BusinessLayerSonuc<Kategori>sonuc= ky.KategoriSil(kategori);
-            if (sonuc.Hatalar.Count > 0)
-            {
-                sonuc.Hatalar.ForEach(h => ModelState.AddModelError("",h));
-                return View(sonuc.nesne);
-            }
+            ky.KullaniciSil(id);
             return RedirectToAction("Index");
         }
-        #endregion
+
 
     }
 }

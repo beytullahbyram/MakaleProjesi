@@ -13,7 +13,10 @@ namespace Makale_BLL
 	public class KullaniciYonet
 	{
 		Repository<Kullanıcı> rep_kul = new Repository<Kullanıcı>();
-
+        public List<Kullanıcı> Listele()
+        {
+            return rep_kul.List();
+        }
         public BusinessLayerSonuc<Kullanıcı> Kaydet(Register_Modal model)
 		{
             BusinessLayerSonuc<Kullanıcı> sonuc= new BusinessLayerSonuc<Kullanıcı>();
@@ -62,6 +65,16 @@ namespace Makale_BLL
 
 		}
 
+        public void KullaniciKaydet(Kullanıcı kullanıcı)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Kullanıcı KullaniciBul(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         public BusinessLayerSonuc<Kullanıcı> LoginKontrol(Login_Modal model)
         {
             BusinessLayerSonuc<Kullanıcı> sonuc = new BusinessLayerSonuc<Kullanıcı>();
@@ -108,13 +121,16 @@ namespace Makale_BLL
         public BusinessLayerSonuc<Kullanıcı> KullaniciUpdate(Kullanıcı kullanıcı)
         {
             BusinessLayerSonuc<Kullanıcı>sonuc=new BusinessLayerSonuc<Kullanıcı>();
-            Kullanıcı k=rep_kul.Find(x=>x.KullaniciAdi == kullanıcı.KullaniciAdi || x.Email == kullanıcı.Email);
-            if(k!=null && k.ID != kullanıcı.ID)
+            Kullanıcı k1=rep_kul.Find(x=>x.KullaniciAdi==kullanıcı.Adi);
+            Kullanıcı k2=rep_kul.Find(x=>x.Email==kullanıcı.Email);
+            if(k1 !=null && k1.ID != kullanıcı.ID)
+                sonuc.Hatalar.Add("Kullanıcı adi sistemde kayıtlı");
+            if(k2 !=null && k2.ID != kullanıcı.ID)
+                sonuc.Hatalar.Add("Email sistemde kayıtlı");
+
+            if(sonuc.Hatalar.Count > 0)
             {
-                if(k.KullaniciAdi == kullanıcı.KullaniciAdi)
-                    sonuc.Hatalar.Add("Kullanıcı adi sistemde kayıtlı");
-                if(k.Email == kullanıcı.Email)
-                    sonuc.Hatalar.Add("Email sistemde kayıtlı");
+                sonuc.nesne=kullanıcı;
                 return sonuc;
             }
             sonuc.nesne=rep_kul.Find(x=>x.ID==kullanıcı.ID);
@@ -128,7 +144,7 @@ namespace Makale_BLL
                 sonuc.nesne.ProfilResmi=kullanıcı.ProfilResmi;
 
             int updatesonuc=rep_kul.Update(sonuc.nesne);
-            if(updatesonuc<0)
+            if(updatesonuc<1)
                 sonuc.Hatalar.Add("Kullanıcı güncellenemedi");
             return sonuc;
 

@@ -137,6 +137,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
+    <Compile Include="Controllers\KullanıcıController.cs" />
+    <Compile Include="Data\Makale_WebContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +166,11 @@
     <Content Include="Views\Kategori\Details.cshtml" />
     <Content Include="Views\Kategori\Edit.cshtml" />
     <Content Include="Views\Kategori\Index.cshtml" />
+    <Content Include="Views\Kullanıcı\Create.cshtml" />
+    <Content Include="Views\Kullanıcı\Delete.cshtml" />
+    <Content Include="Views\Kullanıcı\Details.cshtml" />
+    <Content Include="Views\Kullanıcı\Edit.cshtml" />
+    <Content Include="Views\Kullanıcı\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
