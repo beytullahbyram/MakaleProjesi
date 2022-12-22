@@ -17,7 +17,27 @@ namespace Makale_BLL
         }
         public IQueryable<Makaleler> ListeleQueryable()
         {
-            return repository_makaleler.ListE();
+            return repository_makaleler.ListE();//bellekte veri oluşmaz
+        }
+
+        public Makaleler MakaleBul(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakaleKaydet(Makaleler makaleler)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakaleUpdate(Makaleler makaleler)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakaleSil(Makaleler makaleler)
+        {
+            throw new NotImplementedException();
         }
     }
 }

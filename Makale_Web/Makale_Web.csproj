@@ -121,6 +121,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="App_Code\BootsrapHelper.cshtml" />
     <None Include="Scripts\jquery-3.6.1.intellisense.js" />
     <Content Include="Content\css\shop-homepage.css" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.svg" />
@@ -138,7 +139,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="Controllers\KullanıcıController.cs" />
-    <Compile Include="Data\Makale_WebContext.cs" />
+    <Compile Include="Controllers\MakalelerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +172,11 @@
     <Content Include="Views\Kullanıcı\Details.cshtml" />
     <Content Include="Views\Kullanıcı\Edit.cshtml" />
     <Content Include="Views\Kullanıcı\Index.cshtml" />
+    <Content Include="Views\Makaleler\Create.cshtml" />
+    <Content Include="Views\Makaleler\Delete.cshtml" />
+    <Content Include="Views\Makaleler\Details.cshtml" />
+    <Content Include="Views\Makaleler\Edit.cshtml" />
+    <Content Include="Views\Makaleler\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

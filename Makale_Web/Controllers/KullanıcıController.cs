@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using Makale_BLL;
 using Makale_Entities;
-using Makale_Web.Data;
 
 namespace Makale_Web.Controllers
 {
