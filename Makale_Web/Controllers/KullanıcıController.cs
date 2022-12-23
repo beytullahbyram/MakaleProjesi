@@ -49,12 +49,18 @@ namespace Makale_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Kullanıcı kullanıcı)
         {
+            //modeldeki field kaldırmamızı sağlar
+            ModelState.Remove("DegistirenKullanici");
             if (ModelState.IsValid)
             {
-                ky.KullaniciKaydet(kullanıcı);
+                BusinessLayerSonuc<Kullanıcı>sonuc=ky.KullaniciKaydet(kullanıcı);
+                if (sonuc.Hatalar.Count > 0 ) 
+                {
+                    sonuc.Hatalar.ForEach(x=>ModelState.AddModelError("",x));
+                    return View(kullanıcı);
+                }
                 return RedirectToAction("Index");
             }
-
             return View(kullanıcı);
         }
 
