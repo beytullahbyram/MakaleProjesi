@@ -18,12 +18,8 @@ namespace Makale_Web.Controllers
 
         public ActionResult Index()
         {
-            //Test test = new Test();
-            //test.InsertTest();
-            //test.UpdateTest();  
-            //test.InsertComment();   
-            return View(makaleYonet.MakaleListele().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
-            //return View(makaleYonet.ListeleQueryable().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
+            //return View(makaleYonet.MakaleListele().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
+            return View(makaleYonet.ListeleQueryable().OrderByDescending(x => x.DegistirmeTarihi).ToList());
         }
         
          public ActionResult Kategori(int? id)

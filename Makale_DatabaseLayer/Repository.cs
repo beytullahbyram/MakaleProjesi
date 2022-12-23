@@ -1,4 +1,5 @@
-﻿using Makale_Entities;
+﻿using Makale_Common;
+using Makale_Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -46,7 +47,7 @@ namespace Makale_DatabaseLayer
             {
                 obj.KayıtTarihi= zaman;
                 obj.DegistirmeTarihi = zaman;
-                obj.DegistirenKullanici = "system";
+                obj.DegistirenKullanici = Uygulama.kullanidiad;
             }
 
             return db.SaveChanges();
@@ -65,7 +66,7 @@ namespace Makale_DatabaseLayer
             if (nesne is EntitiesBase)
             {
                 obj.DegistirmeTarihi = DateTime.Now;
-                obj.DegistirenKullanici = "system";
+                obj.DegistirenKullanici = Uygulama.kullanidiad;
                 
             }
 

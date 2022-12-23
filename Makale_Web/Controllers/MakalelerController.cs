@@ -57,9 +57,21 @@ namespace Makale_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( Makaleler makaleler)
         {
+            Kullanıcı kullanıcı=null;
+            if (Session["login"] != null)
+            {
+                kullanıcı=Session["login"] as Kullanıcı;
+            }
+            makaleler.Kullanici=kullanıcı;
+            ModelState.Remove("DegistirenKullanici");
             if (ModelState.IsValid)
             {
-                my.MakaleKaydet(makaleler);
+                BusinessLayerSonuc<Makaleler> sonuc=my.MakaleKaydet(makaleler);
+                if (sonuc.Hatalar.Count > 0)
+                {
+                    sonuc.Hatalar.ForEach(x=>ModelState.AddModelError("",x));
+                    return View(makaleler);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
@@ -69,6 +81,7 @@ namespace Makale_Web.Controllers
         // GET: Makaleler/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,12 +100,18 @@ namespace Makale_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Makaleler makaleler)
         {
+            ModelState.Remove("DegistirenKullanici");
+
+            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
             if (ModelState.IsValid)
             {
-                my.MakaleUpdate(makaleler);
-                return RedirectToAction("Index");
+                    BusinessLayerSonuc<Makaleler>sonuc=my.MakaleUpdate(makaleler);
+                if (sonuc.Hatalar.Count>0)
+                {
+                    sonuc.Hatalar.ForEach(h =>ModelState.AddModelError("",h));
+                    return View(sonuc);
+                }
             }
-            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
             return View(makaleler);
         }
         public ActionResult Delete(int? id)
@@ -116,6 +135,12 @@ namespace Makale_Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Makaleler makaleler = my.MakaleBul(id);
+            BusinessLayerSonuc<Makaleler> sonuc=my.MakaleSil(makaleler);
+            if (sonuc.Hatalar.Count > 0)
+            {
+                sonuc.Hatalar.ForEach(h =>ModelState.AddModelError("",h));
+                return View(sonuc);
+            }
             my.MakaleSil(makaleler);
             return RedirectToAction("Index");
         }

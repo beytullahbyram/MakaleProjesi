@@ -12,6 +12,7 @@ namespace Makale_BLL
 {
 	public class KullaniciYonet
 	{
+        BusinessLayerSonuc<Kullanıcı> sonuc = new BusinessLayerSonuc<Kullanıcı>();
 		Repository<Kullanıcı> rep_kul = new Repository<Kullanıcı>();
         public List<Kullanıcı> Listele()
         {
@@ -19,22 +20,17 @@ namespace Makale_BLL
         }
         public BusinessLayerSonuc<Kullanıcı> Kaydet(Register_Modal model)
 		{
-            BusinessLayerSonuc<Kullanıcı> sonuc= new BusinessLayerSonuc<Kullanıcı>();
-
-            Kullanıcı kullanici = rep_kul.Find(x => x.KullaniciAdi == model.KullaniciAdi || x.Email == model.Email);
-
-		    if(kullanici!=null)
+            Kullanıcı kullanici =new Kullanıcı();
+            kullanici.KullaniciAdi=model.KullaniciAdi;
+            kullanici.Email=model.Email;    
+            
+            sonuc=KullaniciKontrol(kullanici);
+            if (sonuc.Hatalar.Count > 0)
             {
-                if(kullanici.KullaniciAdi==model.KullaniciAdi)
-                {
-                    sonuc.Hatalar.Add("Kullanıcı adı sistemde kayıtlı");
-                }
-                if(kullanici.Email==model.Email)
-                {
-                    sonuc.Hatalar.Add("Email sistemde kayıtlı");
-                }
-
-            }else
+                sonuc.nesne=kullanici;
+                return sonuc;
+            }
+            else
             {
                int kaydet= rep_kul.Insert(new Kullanıcı()
                 {
@@ -65,14 +61,52 @@ namespace Makale_BLL
 
 		}
 
-        public void KullaniciKaydet(Kullanıcı kullanıcı)
+        public BusinessLayerSonuc<Kullanıcı> KullaniciKaydet(Kullanıcı kullanıcı)
         {
-            throw new NotImplementedException();
+		    if(kullanıcı!=null)
+            {
+                if(kullanıcı.KullaniciAdi==kullanıcı.KullaniciAdi)
+                {
+                    sonuc.Hatalar.Add("Kullanıcı adı sistemde kayıtlı");
+                }
+                if(kullanıcı.Email==kullanıcı.Email)
+                {
+                    sonuc.Hatalar.Add("Email sistemde kayıtlı");
+                }
+
+            }else
+            {
+               int kaydet= rep_kul.Insert(new Kullanıcı()
+                {
+                     Email=kullanıcı.Email,
+                     KullaniciAdi=kullanıcı.KullaniciAdi,
+                     Sifre=kullanıcı.Sifre,
+                     AktivasyonAnahtari=Guid.NewGuid(),
+                     Admin=false,
+                     Aktif=false,
+
+                });
+                if(kaydet>0)
+                {
+                    sonuc.nesne = rep_kul.Find(x=>x.Email==kullanıcı.Email && x.KullaniciAdi==kullanıcı.KullaniciAdi);
+
+                    //Aktivasyon maili gönderilecek
+                    string siteUrl = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUrl = $"{siteUrl}/Home/UserActivate/{sonuc.nesne.AktivasyonAnahtari}";
+                    string body = $"Merhaba {sonuc.nesne.KullaniciAdi} <br/> Hesabınızı aktifleştirmek için <a href='{activateUrl}'> tıklayınız</a> ";
+                 
+
+                    MailHelper.SendMail(body, sonuc.nesne.Email, "Hesap Aktifleştirme");
+
+                }
+               
+            }
+            return sonuc;
         }
 
-        public Kullanıcı KullaniciBul(int? id)
+        public Kullanıcı KullaniciBul(int id)
         {
-            throw new NotImplementedException();
+            return rep_kul.Find(x=>x.ID==id);   
         }
 
         public BusinessLayerSonuc<Kullanıcı> LoginKontrol(Login_Modal model)
@@ -120,35 +154,37 @@ namespace Makale_BLL
 
         public BusinessLayerSonuc<Kullanıcı> KullaniciUpdate(Kullanıcı kullanıcı)
         {
-            BusinessLayerSonuc<Kullanıcı>sonuc=new BusinessLayerSonuc<Kullanıcı>();
-            Kullanıcı k1=rep_kul.Find(x=>x.KullaniciAdi==kullanıcı.Adi);
-            Kullanıcı k2=rep_kul.Find(x=>x.Email==kullanıcı.Email);
-            if(k1 !=null && k1.ID != kullanıcı.ID)
-                sonuc.Hatalar.Add("Kullanıcı adi sistemde kayıtlı");
-            if(k2 !=null && k2.ID != kullanıcı.ID)
-                sonuc.Hatalar.Add("Email sistemde kayıtlı");
-
-            if(sonuc.Hatalar.Count > 0)
+            sonuc=KullaniciKontrol(kullanıcı);
+            if (sonuc.Hatalar.Count > 0)
             {
-                sonuc.nesne=kullanıcı;
+                sonuc.nesne = kullanıcı;
                 return sonuc;
             }
-            sonuc.nesne=rep_kul.Find(x=>x.ID==kullanıcı.ID);
-            sonuc.nesne.Adi=kullanıcı.Adi;
-            sonuc.nesne.Soyad=kullanıcı.Soyad;
-            sonuc.nesne.KullaniciAdi=kullanıcı.KullaniciAdi;
-            sonuc.nesne.Email=kullanıcı.Email;
-            sonuc.nesne.Sifre=kullanıcı.Sifre;
+            sonuc.nesne = rep_kul.Find(x => x.ID == kullanıcı.ID);
+            sonuc.nesne.Adi = kullanıcı.Adi;
+            sonuc.nesne.Soyad = kullanıcı.Soyad;
+            sonuc.nesne.KullaniciAdi = kullanıcı.KullaniciAdi;
+            sonuc.nesne.Email = kullanıcı.Email;
+            sonuc.nesne.Sifre = kullanıcı.Sifre;
 
-            if(!string.IsNullOrEmpty(kullanıcı.ProfilResmi))
-                sonuc.nesne.ProfilResmi=kullanıcı.ProfilResmi;
+            if (!string.IsNullOrEmpty(kullanıcı.ProfilResmi))
+                sonuc.nesne.ProfilResmi = kullanıcı.ProfilResmi;
 
-            int updatesonuc=rep_kul.Update(sonuc.nesne);
-            if(updatesonuc<1)
+            int updatesonuc = rep_kul.Update(sonuc.nesne);
+            if (updatesonuc < 1)
                 sonuc.Hatalar.Add("Kullanıcı güncellenemedi");
             return sonuc;
+        }
 
-
+        private  BusinessLayerSonuc<Kullanıcı> KullaniciKontrol(Kullanıcı kullanıcı)
+        {
+            Kullanıcı k1 = rep_kul.Find(x => x.KullaniciAdi == kullanıcı.Adi);
+            Kullanıcı k2 = rep_kul.Find(x => x.Email == kullanıcı.Email);
+            if (k1 != null && k1.ID != kullanıcı.ID)
+                sonuc.Hatalar.Add("Kullanıcı adi sistemde kayıtlı");
+            if (k2 != null && k2.ID != kullanıcı.ID)
+                sonuc.Hatalar.Add("Email sistemde kayıtlı");
+            return  sonuc;
         }
 
         public BusinessLayerSonuc<Kullanıcı> KullaniciSil(int id)

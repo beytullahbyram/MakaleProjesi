@@ -74,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Makale_Common\Makale_Common.csproj">
+      <Project>{F48A92B7-626C-497D-82F5-68C4FC204EF9}</Project>
+      <Name>Makale_Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Makale_Entities\Makale_Entities.csproj">
       <Project>{D7BC4BC1-FAD2-42E7-AA75-F8F47C9963C9}</Project>
       <Name>Makale_Entities</Name>

@@ -11,6 +11,7 @@ namespace Makale_BLL
     public class MakaleYonet
     {
         Repository<Makaleler> repository_makaleler=new Repository<Makaleler>(); 
+        BusinessLayerSonuc<Makaleler> businessLayerSonuc=new BusinessLayerSonuc<Makaleler>();
         public List<Makaleler> MakaleListele()
         {
            return repository_makaleler.List();
@@ -22,22 +23,57 @@ namespace Makale_BLL
 
         public Makaleler MakaleBul(int value)
         {
-            throw new NotImplementedException();
+            return repository_makaleler.Find(x=>x.ID==value);
         }
 
-        public void MakaleKaydet(Makaleler makaleler)
+        public BusinessLayerSonuc<Makaleler> MakaleKaydet(Makaleler makaleler)
         {
-            throw new NotImplementedException();
+            businessLayerSonuc.nesne=repository_makaleler.Find(x=>x.Baslik == makaleler.Baslik && x.KategoriId==makaleler.KategoriId);
+            if(businessLayerSonuc.nesne != null)
+                businessLayerSonuc.Hatalar.Add("Bu kategoride bu isimli makale kayıtlıdır");
+            else
+            {  
+                int sonuc =repository_makaleler.Insert(makaleler);
+                if(sonuc<1)
+                    businessLayerSonuc.Hatalar.Add("Eklenemedi");
+            }
+            return businessLayerSonuc;
+            
         }
 
-        public void MakaleUpdate(Makaleler makaleler)
+        public BusinessLayerSonuc<Makaleler> MakaleUpdate(Makaleler makaleler)
         {
-            throw new NotImplementedException();
+            businessLayerSonuc.nesne= repository_makaleler.Find(x=>x.ID==makaleler.ID);
+            if(businessLayerSonuc.nesne!= null)
+            {
+                businessLayerSonuc.nesne.Baslik=makaleler.Baslik;
+                businessLayerSonuc.nesne.Text=makaleler.Baslik;
+                businessLayerSonuc.nesne.TaslakDurumu=makaleler.TaslakDurumu;
+                businessLayerSonuc.nesne.KategoriId=makaleler.KategoriId;
+                if(repository_makaleler.Update(makaleler) < 1)
+                {
+                    businessLayerSonuc.Hatalar.Add("Güncellenemedi");
+                }
+            }
+            return businessLayerSonuc;
         }
 
-        public void MakaleSil(Makaleler makaleler)
+        public BusinessLayerSonuc<Makaleler> MakaleSil(Makaleler makaleler)
         {
-            throw new NotImplementedException();
+            businessLayerSonuc.nesne= repository_makaleler.Find(x=>x.ID==makaleler.ID);
+            if(businessLayerSonuc != null)
+            {
+                int sonuc=repository_makaleler.Delete(makaleler);
+                if(sonuc < 1)
+                {
+                    businessLayerSonuc.Hatalar.Add("Kayit silinemedi");
+                }
+            }
+            else
+            {
+                businessLayerSonuc.Hatalar.Add("Kayit bulunamadı");
+            }
+            return businessLayerSonuc;
         }
     }
 }
