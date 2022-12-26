@@ -1,10 +1,8 @@
-﻿@using Makale_BLL
+﻿@using Makale_Web.Models
 @using Makale_Entities
 @{ 
-    KategoriYonet kategoriYonet = new KategoriYonet();
-    List<Kategori> kategoriler = kategoriYonet.KategorileriListele();
+    List<Kategori> kategoriler = CacheHelper.Kategoriler();
 }
-
 <p class="lead">Kategoriler</p>
 <div class="list-group">
     <a href="#" class="list-group-item">Tüm kategoriler</a>

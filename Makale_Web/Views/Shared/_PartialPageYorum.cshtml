@@ -1,0 +1,37 @@
+﻿@using Makale_Entities
+@model List<Yorum>
+@{ 
+    Kullanıcı kullanıcı=null;
+    if (Session["login"] != null)
+    {
+        kullanıcı=Session["login"] as Kullanıcı;
+    }
+}
+@foreach (var item in Model)
+{
+    <div class="media">
+        <div class="media-left">
+            <span class="glyphicon glyphicon-comment"></span>
+        </div>
+        <div class="media-body">
+            <div>
+                <span id="text_@item.ID">@item.Text</span>
+                @if(kullanıcı != null && kullanıcı.ID == item.Kullanici.ID)
+                {
+                    <span>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="yorumupdate('edit',@item.ID, text_@item.ID)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </span>
+                }
+                    <small>
+                        <span class="glyphicon glyphicon-time">@item.DegistirmeTarihi</span>
+                        <span class="glyphicon glyphicon-user">@item.Kullanici.KullaniciAdi</span>
+                    </small>
+            </div>
+        </div>
+    </div>
+}

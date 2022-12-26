@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Makale_BLL;
 using Makale_Entities;
+using Makale_Web.Models;
 
 namespace Makale_Web.Controllers
 {
     public class MakalelerController : Controller
     {
         MakaleYonet my=new MakaleYonet();
+        KategoriYonet ky=new KategoriYonet();
 
         // GET: Makaleler
         public ActionResult Index()
@@ -42,17 +44,12 @@ namespace Makale_Web.Controllers
             return View(makaleler);
         }
 
-        KategoriYonet ky=new KategoriYonet();
-        // GET: Makaleler/Create
         public ActionResult Create()
         {
-            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik");
+            ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik");
             return View();
         }
 
-        // POST: Makaleler/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create( Makaleler makaleler)
@@ -74,24 +71,20 @@ namespace Makale_Web.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
+            ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik", makaleler.KategoriId);
             return View(makaleler);
         }
-
-        // GET: Makaleler/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Makaleler makaleler = my.MakaleBul(id.Value);   
             if (makaleler == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
+            ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik", makaleler.KategoriId);
             return View(makaleler);
         }
        
@@ -102,7 +95,7 @@ namespace Makale_Web.Controllers
         {
             ModelState.Remove("DegistirenKullanici");
 
-            ViewBag.KategoriId = new SelectList(ky.KategorileriListele(), "ID", "KategoriBaslik", makaleler.KategoriId);
+            ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik", makaleler.KategoriId);
             if (ModelState.IsValid)
             {
                     BusinessLayerSonuc<Makaleler>sonuc=my.MakaleUpdate(makaleler);

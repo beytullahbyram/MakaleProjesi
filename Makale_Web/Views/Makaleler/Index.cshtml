@@ -3,79 +3,83 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
+<div class="container">
+    <div class="row" style="background-color:darkseagreen">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kullanici.KullaniciAdi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kategori.KategoriBaslik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Baslik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaslakDurumu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BegeniSayisi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KayıtTarihi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DegistirmeTarihi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DegistirenKullanici)
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Kullanici.KullaniciAdi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kategori.KategoriBaslik)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Baslik)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaslakDurumu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BegeniSayisi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KayıtTarihi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegistirmeTarihi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegistirenKullanici)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kullanici.KullaniciAdi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kategori.KategoriBaslik)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Baslik)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaslakDurumu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BegeniSayisi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KayıtTarihi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DegistirmeTarihi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DegistirenKullanici)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kullanici.KullaniciAdi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kategori.KategoriBaslik)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Baslik)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Text)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TaslakDurumu)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.BegeniSayisi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.KayıtTarihi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DegistirmeTarihi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DegistirenKullanici)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </td>
-</tr>
-}
+        </table>
 
-</table>
+    </div>
+</div>

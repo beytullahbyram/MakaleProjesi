@@ -43,7 +43,6 @@
                         </a>
                     </div>
                 </div>
-                lorem*20
             </div>
 
             <div class="row">
@@ -64,7 +63,7 @@
                                 @if (!string.IsNullOrEmpty(item.Text) && item.Text.Length > 5)
                                 {
                                     <p>
-                                        @item.Text.Substring(0, 20)
+                                        @item.Text.Substring(0, 10)
                                     <a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
                                     </p>
                                 }
@@ -76,10 +75,14 @@
                             <hr />
                             <div class="ratings">
                                 <p class="pull-right">
-
-                                    <button class="btn btn-default btn-xs" id="btn-yorum" data-toggle="modal" data-target="#ornekModal">
+                                    @*Jquery
+                                        <button class="btn btn-default btn-xs" id="btn-yorum" data-toggle="modal" data-target="#ornekModal">
                                         <span class="glyphicon glyphicon-comment"></span>
                                         Yorumlar.
+                                    </button>*@
+                                    <button class="btn btn-default btn-xs"  data-toggle="modal" data-target="#Modal1" data-notid="@item.ID" >
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                        Yorumlar...
                                     </button>
                                 </p>
                                 <p>
@@ -101,7 +104,23 @@
     @Html.Partial("_PartialPageFooter");
 }
 
+
+@BootsrapHelper.ModalPopup("Modal1","Yorumlar")
 <script>
+    $(function () {
+        //modal açıldıktan sonraki işlemler...
+        $('#Modal1').on('show.bs.modal', function (e) {//e=> buton bilgilerini tutar
+            var button = $(e.relatedTarget);
+            var notid = button.data("notid");
+            //modal1_body'ye yükle => yorumgoster action
+            $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);//Action partial page döner
+        });
+    });
+    function(mod, yorumid, yorumtext) {
+
+    }
+</script>
+<!--<script>
     $(document).ready(function () {
 
         $("#btn-yorum").on("click", function () {
@@ -109,24 +128,23 @@
         })
     })
 </script>
-<div class="modal fade" tabindex="-1" role="dialog" id="ornekModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="ornekModal">-->
     <!-- /.modal -->
-    <div class="modal-dialog">
+    <!--<div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Modal Başlığı</h4>
             </div>
             <div class="modal-body">
-                <p>yorum...</p>
+                <p>@Model.Find(x=>x.Kullanici.Yorumlar==x.Kullanici.Yorumlar)</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                @*<button type="button" class="btn btn-primary">Değişiklikleri Kaydet</button>*@
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>--><!-- /.modal-content -->
+    <!--</div>--><!-- /.modal-dialog -->
+<!--</div>--><!-- /.modal -->
 
 
 
@@ -134,7 +152,7 @@
 
 
 
-<script>
+<!--<script>
     $('#openBtn').click(function () {
         $('#myModal').modal({
             show: true
@@ -249,4 +267,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
