@@ -134,6 +134,7 @@
     <None Include="Scripts\jquery-3.6.1.intellisense.js" />
     <Content Include="Content\css\shop-homepage.css" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.6.1.js" />
     <Content Include="Scripts\jquery-3.6.1.min.js" />
     <Content Include="Scripts\jquery-3.6.1.slim.js" />
