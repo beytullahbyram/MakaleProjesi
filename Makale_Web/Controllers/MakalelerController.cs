@@ -20,12 +20,15 @@ namespace Makale_Web.Controllers
         // GET: Makaleler
         public ActionResult Index()
         {
-            Kullanıcı kullanıcı=Session["login"] as Kullanıcı;
 
             //include join işlemi yapmamızı sağlar
             var makalelers = my.ListeleQueryable().Include(m => m.Kategori);
-            if (kullanıcı != null)
+            if (Session["login"] != null)
+            {
+                Kullanıcı kullanıcı = (Kullanıcı)Session["login"];
                 makalelers= my.ListeleQueryable().Include(m => m.Kategori).Where(x=>x.Kullanici.ID==kullanıcı.ID);
+
+            }
             return View(makalelers.ToList());
         }
 
@@ -147,7 +150,7 @@ namespace Makale_Web.Controllers
             if (Session["login"] != null)
             {
                 Kullanıcı kullanıcısession=Session["login"] as Kullanıcı;
-                makalelers= ly.ListE().Include("Kullanıcı").Include("Begeni").Where( x=>x.Kullanıcı.ID==kullanıcısession.ID).Select(s=>s.Makaleler).Include(k=>k.Kategori);
+                makalelers = ly.ListE().Include("Kullanıcı").Include("Begeni").Where(x => x.Kullanıcı.ID == kullanıcısession.ID).Select(s => s.Makaleler).Include(k => k.Kategori);
             }
             return View("Index",makalelers.ToList());
         }

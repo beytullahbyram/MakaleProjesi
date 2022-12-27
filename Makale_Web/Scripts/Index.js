@@ -8,6 +8,9 @@ $(function () {
         $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);//Action partial page döner
     });
 });
+
+
+
 function yorumislem(btn, islem, yorumid, yorumtext) {
     var button = $(btn);
     var editmod = button.data("edit");
@@ -28,6 +31,7 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
             span.removeClass("glyphicon-ok");
             span.addClass("glyphicon-edit");
             $(yorumtext).attr("contenteditable", false);
+
             var yenitxt = $(yorumtext).text();
             $.ajax({
                 method: "POST",
@@ -35,11 +39,7 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
                 data: { text: yenitxt }//text parametresini actionda alıcağız
             }).done(function (data) {
                 if (data.sonuc) {
-
-                    alert("siliniyor")
                     $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);
-                    alert("silindi")
-
                 }
                 else {
                     alert("Yorum Düzenlenemedi")
@@ -64,26 +64,23 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
             else {
                 alert("Yorum Silinemedi");
             }
-        }).fail( () => {
+        }).fail(() => {
             alert("İşlem başarısız")
         });
-
     }
     else if (islem === "create") {
         var yorum = $("#yorum_text_id").val();
         $.ajax({
-            method: "POST",
+            method: "Post",
             url: "/Yorum/Create",
-            data: {
-                Text: yorum,
-                noteid: notid
-            }
-        }).done((data) => {
-            if (data.sonuc) {
+            data: { Text: yorum, notid: notid }
+        }).done(function (data) {
+            if (data.sonuc)
                 $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);
-            }
-        }).fail(() => {
-            alert("İşlem başarısız");
-        })
+            else
+                alert("Yorum eklenemedi");
+        }).fail(function () {
+            alert("Sunucu ile bağlantı kurulamadı.");
+        });
     }
 }

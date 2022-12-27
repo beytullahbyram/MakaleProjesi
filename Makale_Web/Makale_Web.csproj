@@ -199,9 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
-    <Folder Include="Views\User\" />
-    <Folder Include="Views\Yorum\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Makale_BLL\Makale_BLL.csproj">

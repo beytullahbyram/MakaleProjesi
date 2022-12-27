@@ -1,11 +1,12 @@
 ﻿@using Makale_Entities
 @model List<Yorum>
 @{
-    Kullanıcı kullanıcı = null;
+    Kullanıcı kullanici = null;
     if (Session["login"] != null)
     {
-        kullanıcı = Session["login"] as Kullanıcı;
+        kullanici = (Kullanıcı)Session["login"];
     }
+
 }
 @foreach (var item in Model)
 {
@@ -17,8 +18,8 @@
             <div>
                 @*contenteditable => edit edilme özelliğini açıp kapatmamızı sağlar*@
                 <span id="text_@item.ID" contenteditable="false">@item.Text</span>
-                @if (kullanıcı != null && kullanıcı.ID == item.Kullanici.ID)
-                {
+                @if (kullanici != null && kullanici.ID == item.Kullanici.ID)
+                    {
                     <span>
                         @*this=>butonun kendisini gönderir*@
                         <button type="button" class="btn btn-warning btn-sm" data-edit="false" onclick="yorumislem(this,'update',@item.ID, text_@item.ID)">
@@ -28,7 +29,7 @@
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </span>
-                }
+                    }
                 <small>
                     <span class="glyphicon glyphicon-time">@item.DegistirmeTarihi</span>
                     <span class="glyphicon glyphicon-user">@item.Kullanici.KullaniciAdi</span>
@@ -36,16 +37,15 @@
             </div>
         </div>
     </div>
-    
 }
 
-@if (kullanıcı != null)
+@if (kullanici != null)
 {
     <hr />
     <div class="input-group" style="margin:4px 4px">
         <input type="text" class="form-control" placeholder="Yorumunuz" id="yorum_text_id">
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button" onclick="yorumislem(this, 'create');">Kaydet</button>
+            <button class="btn btn-default" type="button" onclick="yorumislem(this, 'create')">Kaydet</button>
         </span>
     </div><!-- /input-group -->
 }

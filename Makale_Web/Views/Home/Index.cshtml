@@ -3,8 +3,6 @@
     ViewBag.Title = "Index";
 }
 
-
-
 <div class="container">
 
     <div class="row">
@@ -64,10 +62,10 @@
                                 {
                                     <p>
                                         @item.Text.Substring(0, 10)
-                                    <a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
+                                        <a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
                                     </p>
                                 }
-                                else 
+                                else
                                 {
                                     <p>@item.Text</p>
                                 }
@@ -75,12 +73,7 @@
                             <hr />
                             <div class="ratings">
                                 <p class="pull-right">
-                                    @*Jquery
-                                        <button class="btn btn-default btn-xs" id="btn-yorum" data-toggle="modal" data-target="#ornekModal">
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                        Yorumlar.
-                                    </button>*@
-                                    <button class="btn btn-default btn-xs"  data-toggle="modal" data-target="#Modal1" data-notid="@item.ID" >
+                                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#Modal1" data-notid="@item.ID">
                                         <span class="glyphicon glyphicon-comment"></span>
                                         Yorumlar...
                                     </button>
@@ -103,6 +96,5 @@
 {
     @Html.Partial("_PartialPageFooter");
 }
-@BootsrapHelper.ModalPopup("Modal1","Yorumlar")
+@BootsrapHelper.ModalPopup("Modal1", "Yorumlar")
 <script src="~/Scripts/Index.js"></script>
-
