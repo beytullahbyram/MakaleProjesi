@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿const { data } = require("jquery");
+
+$(function () {
     //modal açıldıktan sonraki işlemler...
     $('#Modal1').on('show.bs.modal', function (e) {//e=> buton bilgilerini tutar
         var button = $(e.relatedTarget);
@@ -44,4 +46,19 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
             })
         }
     }
+    //else if (islem === "delete") {
+    //    $.ajax({
+    //        method: "POST",
+    //        url: "/Yorum/Delete/" + yorumid,
+    //    }).done(function (data) {
+    //        if (data.sonuc) {
+    //            $('#modal1').load("/Yorum/YorumGoster/" + notid);
+    //        }
+    //        else {
+    //            alert("Yorum Silinemedi")
+    //        }
+    //    }).fail(function () {
+    //        alert("İşlem başarısız")
+    //    });
+    //}
 }

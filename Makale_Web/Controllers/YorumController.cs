@@ -40,5 +40,19 @@ namespace Makale_Web.Controllers
             }
             return Json(new {sonuc=false},JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            if (yy.YorumSil(id.Value) > 0)
+            {
+                return Json(new {sonuc=true},JsonRequestBehavior.AllowGet);
+            }
+            return Json(new {sonuc=false},JsonRequestBehavior.AllowGet);
+        }
     }
+    
 }

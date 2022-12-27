@@ -19,15 +19,15 @@
                 <span id="text_@item.ID" contenteditable="false">@item.Text</span>
                 @if(kullanıcı != null && kullanıcı.ID == item.Kullanici.ID)
                 {
-                    <span>
-                        @*this=>butonun kendisini gönderir*@
-                        <button type="button" class="btn btn-warning btn-sm" data-edit="false" onclick="yorumislem(this,'update',@item.ID, text_@item.ID)">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </button>
-                        <button type="button" class="btn btn-warning btn-sm">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </span>
+            <span>
+                @*this=>butonun kendisini gönderir*@
+                    <button type="button" class="btn btn-warning btn-sm" data-edit="false" onclick="yorumislem(this,'update',@item.ID, text_@item.ID)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="yorumislem(this,'delete',@item.ID)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+            </span>
                 }
                     <small>
                         <span class="glyphicon glyphicon-time">@item.DegistirmeTarihi</span>
