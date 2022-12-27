@@ -116,8 +116,28 @@
             $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);//Action partial page döner
         });
     });
-    function(mod, yorumid, yorumtext) {
-
+    function yorumislem(btn, islem, yorumid, yorumtext) {
+        var button = $(btn);
+        var editmod = button.data("edit");
+        if (islem === "update") {
+            if (!editmod) {
+                button.data("edit", true);
+                button.removeClass("btn-warning");
+                button.addClass("btn-success");
+                var span = button.find("tspan");
+                span.removeClass("glyphicon-edit");
+                span.addClass("glyphicon-ok");
+                $(yorumtext).attr("contenteditable",true);
+            } else {
+                button.data("edit", false);
+                button.removeClass("btn-success");
+                button.addClass("btn-warning");
+                var span = button.find("tspan");
+                span.removeClass("glyphicon-ok");
+                span.addClass("glyphicon-edit");
+                $(yorumtext).attr("contenteditable", false);
+            }
+        }
     }
 </script>
 <!--<script>

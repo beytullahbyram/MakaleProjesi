@@ -15,11 +15,13 @@
         </div>
         <div class="media-body">
             <div>
-                <span id="text_@item.ID">@item.Text</span>
+                @*contenteditable => edit edilme özelliğini açıp kapatmamızı sağlar*@
+                <span id="text_@item.ID" contenteditable="false">@item.Text</span>
                 @if(kullanıcı != null && kullanıcı.ID == item.Kullanici.ID)
                 {
                     <span>
-                        <button type="button" class="btn btn-warning btn-sm" onclick="yorumupdate('edit',@item.ID, text_@item.ID)">
+                        @*this=>butonun kendisini gönderir*@
+                        <button type="button" class="btn btn-warning btn-sm" data-edit="false" onclick="yorumislem(this,'update',@item.ID, text_@item.ID)">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
                         <button type="button" class="btn btn-warning btn-sm">
