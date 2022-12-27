@@ -25,5 +25,10 @@ namespace Makale_BLL
             Yorum silineceyorum=rep_yorum.Find(x=>x.ID==id); 
             return rep_yorum.Delete(silineceyorum);
         }
+
+        public int YorumEkle(Yorum yorum)
+        {
+            return rep_yorum.Insert(yorum);
+        }
     }
 }

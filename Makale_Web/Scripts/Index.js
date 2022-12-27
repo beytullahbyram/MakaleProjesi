@@ -1,10 +1,9 @@
-﻿const { data } = require("jquery");
-
+﻿var notid = -1;//notid undefined olur. tarih bilgisi güncelleme işlemi düzeltildi
 $(function () {
     //modal açıldıktan sonraki işlemler...
     $('#Modal1').on('show.bs.modal', function (e) {//e=> buton bilgilerini tutar
         var button = $(e.relatedTarget);
-        var notid = button.data("notid");
+        notid = button.data("notid");
         //modal1_body'ye yükle => yorumgoster action
         $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);//Action partial page döner
     });
@@ -36,29 +35,55 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
                 data: { text: yenitxt }//text parametresini actionda alıcağız
             }).done(function (data) {
                 if (data.sonuc) {
-                    $('#modal1').load("/Yorum/YorumGoster/" + notid);
+
+                    alert("siliniyor")
+                    $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);
+                    alert("silindi")
+
                 }
                 else {
                     alert("Yorum Düzenlenemedi")
                 }
-            }).fail(function () {
+            }).fail(() => {
                 alert("İşlem başarısız")
             })
         }
     }
-    //else if (islem === "delete") {
-    //    $.ajax({
-    //        method: "POST",
-    //        url: "/Yorum/Delete/" + yorumid,
-    //    }).done(function (data) {
-    //        if (data.sonuc) {
-    //            $('#modal1').load("/Yorum/YorumGoster/" + notid);
-    //        }
-    //        else {
-    //            alert("Yorum Silinemedi")
-    //        }
-    //    }).fail(function () {
-    //        alert("İşlem başarısız")
-    //    });
-    //}
+    else if (islem === "delete") {
+        var mesaj = confirm("Silmet istediğinize emin misiniz?");
+        if (!mesaj) {
+            return false;
+        }
+        $.ajax({
+            method: "GET",
+            url: "/Yorum/Delete/" + yorumid,
+        }).done((data) => {
+            if (data.sonuc) {
+                $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);
+            }
+            else {
+                alert("Yorum Silinemedi");
+            }
+        }).fail( () => {
+            alert("İşlem başarısız")
+        });
+
+    }
+    else if (islem === "create") {
+        var yorum = $("#yorum_text_id").val();
+        $.ajax({
+            method: "POST",
+            url: "/Yorum/Create",
+            data: {
+                Text: yorum,
+                noteid: notid
+            }
+        }).done((data) => {
+            if (data.sonuc) {
+                $('#Modal1_body').load("/Yorum/YorumGoster/" + notid);
+            }
+        }).fail(() => {
+            alert("İşlem başarısız");
+        })
+    }
 }
