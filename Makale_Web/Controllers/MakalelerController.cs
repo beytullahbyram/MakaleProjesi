@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Makale_BLL;
 using Makale_Entities;
@@ -16,6 +17,7 @@ namespace Makale_Web.Controllers
     {
         MakaleYonet my=new MakaleYonet();
         KategoriYonet ky=new KategoriYonet();
+        LikeYonet ly=new LikeYonet();
 
         // GET: Makaleler
         public ActionResult Index()
@@ -154,6 +156,26 @@ namespace Makale_Web.Controllers
             }
             return View("Index",makalelers.ToList());
         }
+        [HttpPost]
+        public ActionResult Begeni(int[] arr)
+        {
+            List<int> listlike=new List<int>();
+            Kullanıcı kullanıcı=Session["login"] as Kullanıcı;
+            
+            //x=>begeni tablosu
+            //begeni tablosundaki id ile giriş yapan kullanıcının idsi eşleşiyor mu ve gelen dizi begeni tablosundaki idyi içeriyor mu kontrolü yapıldı ve select ile sadece int değerleri list şekilde geri aldık
+            if(kullanıcı != null)
+            {
+                    listlike = ly.BegeniListele(x=>x.Kullanıcı.ID == kullanıcı.ID && arr.Contains(x.Makaleler.ID)).Select(x=>x.Makaleler.ID).ToList();
+
+            }
+
+            return Json(new {sonuc=listlike},JsonRequestBehavior.AllowGet);//sayfaya geri gönderdik çünkü like butonların dolu olup olamayacağına bakacağız
+
+        }
+
+
+
 
     }
 }

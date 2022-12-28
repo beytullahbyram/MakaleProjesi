@@ -45,9 +45,8 @@
 
             <div class="row">
                 @foreach (Makaleler item in Model)
-                {
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+                 {
+                    <div class="col-sm-4 col-lg-4 col-md-4" data-notid="@item.ID">
                         <div class="thumbnail">
                             <img src="~/image/bookimg.jpg" alt="">
                             <div class="caption">
@@ -79,15 +78,15 @@
                                     </button>
                                 </p>
                                 <p>
-                                    <button class="btn btn-default btn-xs like-btn">
-                                        @item.BegeniSayisi
+                                    <button class="btn btn-default btn-xs like-btn" data-notid="@item.ID" data-like="false" >
                                         <span class="glyphicon glyphicon-heart-empty like"></span>
+                                        <span class="begenisayisi"> @item.BegeniSayisi </span>
                                     </button>
                                 </p>
                             </div>
                         </div>
                     </div>
-                }
+                 }
             </div>
         </div>
     </div>
@@ -97,4 +96,7 @@
     @Html.Partial("_PartialPageFooter");
 }
 @BootsrapHelper.ModalPopup("Modal1", "Yorumlar")
+
 <script src="~/Scripts/Index.js"></script>
+
+<script src="~/Scripts/LikeScript.js"></script>

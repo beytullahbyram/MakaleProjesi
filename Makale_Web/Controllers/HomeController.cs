@@ -65,6 +65,7 @@ namespace Makale_Web.Controllers
 				}
 
 				Session["login"] = sonuc.nesne; //Session da login olan kullanıcı bilgileri tutuldu.
+				Uygulama.kullanidiad=sonuc.nesne.KullaniciAdi;//uygulama classındaki default bilgiyi değiştirdik
 				return RedirectToAction("Index");//Login olduğu için indexe yönlendirildi.
 			}
 

@@ -142,6 +142,7 @@
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\jquery.js" />
+    <Content Include="Scripts\LikeScript.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
