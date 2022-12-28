@@ -1,21 +1,15 @@
-﻿const { data } = require("jquery");
-
-$(function () {
-    alert("1");
+﻿$(function () {
     var notid_dizi = [];
 
     $("div[data-notid]").each(function (i, e) {
         notid_dizi.push($(e).data("notid"));
     });
-
     $.ajax({
         method: "POST",
         url: "/Makaleler/Begeni",
         data: { arr: notid_dizi }
     }).done(function (data) {
-        alert("done")
         if (data.sonuc != null && data.sonuc.length > 0) {
-            alert("ifffff");
             for (var i = 0; i < data.sonuc.length; i++) {
                 var id = data.sonuc[i];
                 var div = $("div[data-notid=" + id + "]");
@@ -31,23 +25,40 @@ $(function () {
     });
 
     $("button[data-like]").click(function () {
-        var btn = $(this);
-        var btnlike = btn.data("like");
-        var btnnotid = btn.data("notid");
-        var spankalp = btn.find("span.like");
-        var spanlikesayi = btn.find("span.begenisayisi");
+        var btn = $(this);//butona ulaştık.
+        var btnlike = btn.data("like");//bool türündedir.
+        var btnnotid = btn.data("notid");//makalenin id değeri tutulur.
+        var spankalp = btn.find("span.like");//kalp butonunu değiştirmek için
+        var spanlikesayi = btn.find("span.begenisayisi");//beğeni saysını değiştirmek için
 
         $.ajax({
             method: "POST",
             url: "/Makaleler/LikeDuzenle",
             data: {
-                like=!btnlike,
-                notid=btnnotid
+                like: !btnlike,
+                notid: btnnotid
             }
         }).done((data) => {
+            if (data.hata == false) {
+                alert("Beğeni işlemi gerçekleşmedi")
+            }
+            else {
+                btnlike = !btnlike;
+                btn.data("like", btnlike);
+                spanlikesayi.text(data.res);
 
+                spankalp.removeClass("glyphicon-heart-empty");
+                spankalp.removeClass("glyphicon-heart");
+
+                if (btnlike) {
+                    spankalp.addClass("glyphicon-heart");
+                }
+                else {
+                    spankalp.addClass("glyphicon-heart-empty");
+                }
+            }
+        }).fail(() => {
+            alert("Beğeni işlemi sırasında sunucu bağlantısı başarısız oldu");
         });
     });
 });
-
-

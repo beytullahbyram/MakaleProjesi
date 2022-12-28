@@ -21,5 +21,20 @@ namespace Makale_BLL
         {
             return rep_like.List(kosul);
         }
-    }
+
+		public Begeni BegeniBul(int makaleid, int kullanıcıid)
+        {
+            return rep_like.Find(x=>x.Makaleler.ID==makaleid && x.Kullanıcı.ID==kullanıcıid);
+        }
+
+		public int BegeniSil(Begeni begeni)
+		{
+			return rep_like.Delete(begeni);
+		}
+
+		public int BegeniEkle(Begeni begeni)
+		{
+			return rep_like.Insert(begeni); 
+		}
+	}
 }
