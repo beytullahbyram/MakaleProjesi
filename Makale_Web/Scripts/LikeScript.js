@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿const { data } = require("jquery");
+
+$(function () {
     alert("1");
     var notid_dizi = [];
 
@@ -29,9 +31,23 @@
     });
 
     $("button[data-like]").click(function () {
+        var btn = $(this);
+        var btnlike = btn.data("like");
+        var btnnotid = btn.data("notid");
+        var spankalp = btn.find("span.like");
+        var spanlikesayi = btn.find("span.begenisayisi");
 
+        $.ajax({
+            method: "POST",
+            url: "/Makaleler/LikeDuzenle",
+            data: {
+                like=!btnlike,
+                notid=btnnotid
+            }
+        }).done((data) => {
+
+        });
     });
-
 });
 
 

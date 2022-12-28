@@ -175,7 +175,11 @@ namespace Makale_Web.Controllers
         }
 
 
+        public ActionResult LikeDuzenle(int notid,bool like)
+        {
 
+            return View();  
+        }
 
     }
 }
