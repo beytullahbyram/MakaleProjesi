@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Makale_Web.Controllers
 {
 	public class HomeController : Controller
@@ -55,6 +54,9 @@ namespace Makale_Web.Controllers
 		[HttpPost]
 		public ActionResult Login(Login_Modal modal)
 		{
+			
+
+
 			if (ModelState.IsValid)
 			{
 				BusinessLayerSonuc<Kullanıcı> sonuc = ky.LoginKontrol(modal);

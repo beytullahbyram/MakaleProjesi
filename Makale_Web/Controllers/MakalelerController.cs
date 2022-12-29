@@ -172,8 +172,11 @@ namespace Makale_Web.Controllers
 			int res = 0;
 			Kullanıcı kullanıcı = Session["login"] as Kullanıcı;
 			Makaleler makale = my.MakaleBul(notid);
-
-			Begeni begeni = ly.BegeniBul(notid, kullanıcı.ID);//makale ve kullanıcısı belli olan beğeniye ulaştık
+            if (kullanıcı == null)
+            {
+                return Json(new { hata = true, res = 0 });
+            }
+            Begeni begeni = ly.BegeniBul(notid, kullanıcı.ID);//makale ve kullanıcısı belli olan beğeniye ulaştık
 
 			if (begeni != null && like == false)//beğeni var ise kaldırılma işlemi gerçekleştiriliyor
 			{
@@ -194,7 +197,7 @@ namespace Makale_Web.Controllers
 				else
 					makale.BegeniSayisi--;
 				BusinessLayerSonuc<Makaleler> makaleUpdate = my.MakaleUpdate(makale);//Beğeni sayısını güncelliyoruz
-				if (makaleUpdate.Hatalar.Count > 0)
+				if (makaleUpdate.Hatalar.Count == 0)
 					return Json(new { hata = false, res = makale.BegeniSayisi });
 			}
 			return Json(new { hata = true, res = makale.BegeniSayisi });

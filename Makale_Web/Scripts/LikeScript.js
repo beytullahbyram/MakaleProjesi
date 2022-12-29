@@ -23,8 +23,10 @@
     }).fail(function () {
         alert("faill")
     });
-
     $("button[data-like]").click(function () {
+  
+
+
         var btn = $(this);//butona ulaştık.
         var btnlike = btn.data("like");//bool türündedir.
         var btnnotid = btn.data("notid");//makalenin id değeri tutulur.
@@ -39,11 +41,14 @@
                 notid: btnnotid
             }
         }).done((data) => {
-            if (data.hata == false) {
-                alert("Beğeni işlemi gerçekleşmedi")
+            if (data.hata) {
+                alert("Beğeni işlemi gerçekleşmedi");
+                if (data.res == 0) {
+                    window.location.href = '/Home/Login'
+                }
             }
             else {
-                btnlike = !btnlike;
+                btnlike = !btnlike; //butonun bool değerini değiştiriyoruz çünkü değerin tersini yolluyoruz controllera ama onu almıyoruz o yüzden burda değerini değiştirdik
                 btn.data("like", btnlike);
                 spanlikesayi.text(data.res);
 
@@ -58,7 +63,10 @@
                 }
             }
         }).fail(() => {
-            alert("Beğeni işlemi sırasında sunucu bağlantısı başarısız oldu");
+            alert("Beğeni işlemi sırasında sunucu bağlantısı başarısız oldu Login sayfasına yönlendiriliyorsunuz");
+            //$(location).attr('href', 'https://localhost:44315/Home/Login');
+            window.location.href='/Home/Login'
+
         });
     });
 });
