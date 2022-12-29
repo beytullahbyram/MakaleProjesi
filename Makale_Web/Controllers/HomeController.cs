@@ -19,21 +19,15 @@ namespace Makale_Web.Controllers
 		public ActionResult Index()
 		{
 			//return View(makaleYonet.MakaleListele().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
-			return View(makaleYonet.ListeleQueryable().OrderByDescending(x => x.DegistirmeTarihi).ToList());
+			return View(makaleYonet.ListeleQueryable().Where(x=>x.TaslakDurumu == false).OrderByDescending(x => x.DegistirmeTarihi).ToList());
 		}
 
 		public ActionResult Kategori(int? id)
 		{
 			if (id == null)
 				return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-
-			KategoriYonet kategoriYonet = new KategoriYonet();
-			Kategori kategori = kategoriYonet.KategoriBul(id.Value);
-			if (kategori == null)
-			{
-				return HttpNotFound();
-			}
-			return View("Index", kategori.Makaleler);
+			List<Makaleler>makale=makaleYonet.ListeleQueryable().Where(x=>x.TaslakDurumu==false && x.Kategori.ID == id).OrderByDescending(x=> x.DegistirmeTarihi).ToList();	
+			return View("Index",makale);
 		}
 
 		public ActionResult Begenilenler()

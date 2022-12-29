@@ -1,4 +1,5 @@
-﻿var notid = -1;//notid undefined olur. tarih bilgisi güncelleme işlemi düzeltildi
+﻿
+var notid = -1;//notid undefined olur. tarih bilgisi güncelleme işlemi düzeltildi
 $(function () {
     //modal açıldıktan sonraki işlemler...
     $('#Modal1').on('show.bs.modal', function (e) {//e=> buton bilgilerini tutar
@@ -84,3 +85,5 @@ function yorumislem(btn, islem, yorumid, yorumtext) {
         });
     }
 }
+
+

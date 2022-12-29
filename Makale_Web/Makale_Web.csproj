@@ -143,6 +143,7 @@
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\jquery.js" />
     <Content Include="Scripts\LikeScript.js" />
+    <Content Include="Scripts\MakaleGoster.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +192,7 @@
     <Content Include="Views\Makaleler\Edit.cshtml" />
     <Content Include="Views\Makaleler\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPageYorum.cshtml" />
+    <Content Include="Views\Shared\_PartialPageMakaleDevam.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

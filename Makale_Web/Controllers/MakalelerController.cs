@@ -174,7 +174,7 @@ namespace Makale_Web.Controllers
 			Makaleler makale = my.MakaleBul(notid);
             if (kullanıcı == null)
             {
-                return Json(new { hata = true, res = 0 });
+                return Json(new { hata = true, res = -1 });
             }
             Begeni begeni = ly.BegeniBul(notid, kullanıcı.ID);//makale ve kullanıcısı belli olan beğeniye ulaştık
 
@@ -203,5 +203,19 @@ namespace Makale_Web.Controllers
 			return Json(new { hata = true, res = makale.BegeniSayisi });
 
 		}
-	}
+
+
+        public ActionResult DevamGoster(int? id)
+        {			
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+			}
+
+            Makaleler makale = my.MakaleBul(id.Value);
+			return PartialView("_PartialPageMakaleDevam", makale);
+        }
+
+
+    }
 }

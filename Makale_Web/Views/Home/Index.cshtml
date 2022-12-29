@@ -51,7 +51,7 @@
                             <img src="~/image/bookimg.jpg" alt="">
                             <div class="caption">
                                 <h4>
-                                    <a href="#">@item.Baslik</a>
+                                    <a href="#" data-toggle="modal" data-target="#Modal2" data-notid="@item.ID">@item.Baslik</a>
                                 </h4>
                                 <h6>
                                     <span class="glyphicon glyphicon-user"><b>@item.Kullanici.KullaniciAdi   </b></span><br />
@@ -61,7 +61,7 @@
                                 {
                                     <p>
                                         @item.Text.Substring(0, 10)
-                                        <a href="#" class="btn-btn btn-default btn-xs">devamı...</a>
+                                        <a href="#" class="btn-btn btn-default btn-xs" data-toggle="modal" data-target="#Modal2" data-notid="@item.ID">devamı...</a>
                                     </p>
                                 }
                                 else
@@ -96,7 +96,10 @@
     @Html.Partial("_PartialPageFooter");
 }
 @BootsrapHelper.ModalPopup("Modal1", "Yorumlar")
+@BootsrapHelper.ModalPopup("Modal2", "Makale")
+
 
 <script src="~/Scripts/Index.js"></script>
 
 <script src="~/Scripts/LikeScript.js"></script>
+<script src="~/Scripts/MakaleGoster.js"></script>

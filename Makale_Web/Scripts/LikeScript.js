@@ -43,7 +43,7 @@
         }).done((data) => {
             if (data.hata) {
                 alert("Beğeni işlemi gerçekleşmedi");
-                if (data.res == 0) {
+                if (data.res == -1) {
                     window.location.href = '/Home/Login'
                 }
             }
