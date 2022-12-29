@@ -1,5 +1,6 @@
 ﻿using Makale_BLL;
 using Makale_Entities;
+using Makale_Web.Filter;
 using Makale_Web.Models;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Makale_Web.Controllers
 {
+	
 	public class MakalelerController : Controller
 	{
 		private MakaleYonet my = new MakaleYonet();
@@ -17,7 +19,7 @@ namespace Makale_Web.Controllers
 		private LikeYonet ly = new LikeYonet();
 		private YorumYonet yy = new YorumYonet();
 
-		// GET: Makaleler
+		[Auth]
 		public ActionResult Index()
 		{
 			//include join işlemi yapmamızı sağlar
@@ -29,8 +31,7 @@ namespace Makale_Web.Controllers
 			}
 			return View(makalelers.ToList());
 		}
-
-		// GET: Makaleler/Details/5
+		[Auth]
 		public ActionResult Details(int? id)
 		{
 			if (id == null)
@@ -44,14 +45,13 @@ namespace Makale_Web.Controllers
 			}
 			return View(makaleler);
 		}
-
+		[Auth]
 		public ActionResult Create()
 		{
 			ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik");
 			return View();
 		}
-
-		[HttpPost]
+		[HttpPost][Auth]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(Makaleler makaleler)
 		{
@@ -75,7 +75,7 @@ namespace Makale_Web.Controllers
 			ViewBag.KategoriId = new SelectList(CacheHelper.Kategoriler(), "ID", "KategoriBaslik", makaleler.KategoriId);
 			return View(makaleler);
 		}
-
+		[Auth]
 		public ActionResult Edit(int? id)
 		{
 			if (id == null)
@@ -90,7 +90,7 @@ namespace Makale_Web.Controllers
 			return View(makaleler);
 		}
 
-		[HttpPost]
+		[HttpPost][Auth]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(Makaleler makaleler)
 		{
@@ -108,7 +108,7 @@ namespace Makale_Web.Controllers
 			}
 			return View(makaleler);
 		}
-
+		[Auth]
 		public ActionResult Delete(int? id)
 		{
 			if (id == null)
@@ -122,10 +122,9 @@ namespace Makale_Web.Controllers
 			}
 			return View(makaleler);
 		}
-
 		// POST: Makaleler/Delete/5
 		[HttpPost, ActionName("Delete")]
-		[ValidateAntiForgeryToken]
+		[ValidateAntiForgeryToken][Auth]
 		public ActionResult DeleteConfirmed(int id)
 		{
 			Makaleler makaleler = my.MakaleBul(id);
@@ -151,7 +150,7 @@ namespace Makale_Web.Controllers
 			return View("Index", makalelers.ToList());
 		}
 
-		[HttpPost]
+		[HttpPost][Auth]
 		public ActionResult Begeni(int[] arr)
 		{
 			List<int> listlike = new List<int>();
@@ -166,7 +165,7 @@ namespace Makale_Web.Controllers
 
 			return Json(new { sonuc = listlike }, JsonRequestBehavior.AllowGet);//sayfaya geri gönderdik çünkü like butonların dolu olup olamayacağına bakacağız
 		}
-		[HttpPost]
+		[HttpPost][Auth]
 		public ActionResult LikeDuzenle(int notid, bool like)
 		{
 			int res = 0;
@@ -203,8 +202,6 @@ namespace Makale_Web.Controllers
 			return Json(new { hata = true, res = makale.BegeniSayisi });
 
 		}
-
-
         public ActionResult DevamGoster(int? id)
         {			
 			if (id == null)

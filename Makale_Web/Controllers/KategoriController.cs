@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Makale_BLL;
 using Makale_Entities;
+using Makale_Web.Filter;
 
 namespace Makale_Web.Controllers
 {
+    [Auth][AuthAdmin]
     public class KategoriController : Controller
     {
         #region DB

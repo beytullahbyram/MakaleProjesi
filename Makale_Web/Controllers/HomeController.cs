@@ -2,6 +2,7 @@
 using Makale_Common;
 using Makale_Entities;
 using Makale_Entities.View_modal;
+using Makale_Web.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Makale_Web.Controllers
 {
+	[Exc]
 	public class HomeController : Controller
 	{
 		// GET: Home
@@ -111,7 +113,7 @@ namespace Makale_Web.Controllers
 				hatalar = (List<string>)TempData["aktifsonuc"];
 			return View(hatalar);
 		}
-
+		
 		public ActionResult Logout()
 		{
 			Session.Clear();
@@ -122,19 +124,19 @@ namespace Makale_Web.Controllers
 		{
 			return RedirectToAction("Index");
 		}
-
+		[Auth]
 		public ActionResult ProfilGoster()
 		{
 			Kullanıcı kullanıcı = (Kullanıcı)Session["login"];
 			return View(kullanıcı);
 		}
-
+		[Auth]
 		public ActionResult ProfilDegistir()
 		{
 			Kullanıcı kullanıcı = (Kullanıcı)Session["login"];
 			return View(kullanıcı);
 		}
-
+		[Auth]
 		[HttpPost]
 		public ActionResult ProfilDegistir(Kullanıcı model, HttpPostedFile profilresmi)
 		{
@@ -196,5 +198,9 @@ namespace Makale_Web.Controllers
             Session.Clear();
             return RedirectToAction("Index");
 		}
+		public ActionResult ErrorPage()
+        {
+			return View();	
+        }
 	}
 }

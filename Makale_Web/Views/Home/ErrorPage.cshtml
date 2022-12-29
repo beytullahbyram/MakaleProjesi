@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ErrorPage";
+}
+
+<h2>ErrorPage</h2>
+@{ 
+            Exception exc=null;
+            if (TempData["error"] != null)
+            {
+                exc=TempData["error"] as Exception;
+            }
+}
+
+<div>
+    <div class="col-md-12 col-md-offset-10">
+        <h1>Hata</h1>
+        <p>Sistem yöneticisi ile iletişime geçiniz</p>
+        @if(exc != null)
+            {
+                <b>Detay => </b>@exc.Message
+            }
+            <a href="/Home/Index">Anasayfa</a>
+    </div>
+</div>

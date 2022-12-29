@@ -1,5 +1,6 @@
 ﻿using Makale_BLL;
 using Makale_Entities;
+using Makale_Web.Filter;
 using System.Net;
 using System.Web.Mvc;
 
@@ -20,7 +21,7 @@ namespace Makale_Web.Controllers
 
 			return PartialView("_PartialPageYorum", not.Yorumlar);
 		}
-
+		[Auth]
 		[HttpPost]
 		public ActionResult Edit(int? id, string text)
 		{
@@ -44,7 +45,7 @@ namespace Makale_Web.Controllers
 
 			return Json(new { sonuc = false }, JsonRequestBehavior.AllowGet);
 		}
-
+		[Auth]
 		public ActionResult Delete(int? id)
 		{
 			if (id == null)
@@ -65,8 +66,7 @@ namespace Makale_Web.Controllers
 
 			return Json(new { sonuc = false }, JsonRequestBehavior.AllowGet);
 		}
-
-
+		[Auth]
 		[HttpPost]
 		public ActionResult Create(Yorum yorum, int? notid)
 		{
