@@ -12,14 +12,14 @@
             }
 }
 
-<div>
-    <div class="col-md-12 col-md-offset-10">
+<div class="container" style="text-align:center"> 
+    <div class="col-md-8 col-md-offset-2">
         <h1>Hata</h1>
         <p>Sistem yöneticisi ile iletişime geçiniz</p>
         @if(exc != null)
             {
                 <b>Detay => </b>@exc.Message
             }
-            <a href="/Home/Index">Anasayfa</a>
+        <a href="/Home/Index">Anasayfa</a>
     </div>
 </div>

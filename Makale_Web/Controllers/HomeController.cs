@@ -20,6 +20,8 @@ namespace Makale_Web.Controllers
 
 		public ActionResult Index()
 		{
+			int xxx = 1;
+			int yyy=xxx/0;
 			//return View(makaleYonet.MakaleListele().OrderByDescending(x=>x.DegistirmeTarihi).ToList());
 			return View(makaleYonet.ListeleQueryable().Where(x=>x.TaslakDurumu == false).OrderByDescending(x => x.DegistirmeTarihi).ToList());
 		}
