@@ -1,4 +1,4 @@
-# Asp.Net MVC Makale projesi
+# Asp.Net MVC Makale projesi | Code First
 
 **Projeyi başlatmadan önce Web.config dosyasında connectionStrings bağlantınızı gözden geçirin, appSettings kısmın da ise eposta gönderim işlemleri için gerekli alanlar doldurulmalıdır.**
 
